@@ -85,6 +85,16 @@
         ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
       </a>
     </ul>
+
+    {%- assign footer_linklist = section.settings.footer_linklist -%}
+    {% if linklists[footer_linklist].links.size > 0 %}
+      <ul>
+        {% for link in linklists[footer_linklist].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
   </nav>
 </div>
 
@@ -112,6 +122,12 @@
         "id": "main_linklist",
         "label": "Menu",
         "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "First menu",
+        "default": "footer"
       }
     ]
   }
