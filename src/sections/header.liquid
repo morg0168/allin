@@ -56,6 +56,7 @@
 
   </header>
 
+{% if template.name == 'index' %} {% else %}
   <nav role="navigation">
     <ul class="site-nav top">
       {% for link in linklists[section.settings.main_linklist].links %}
@@ -96,6 +97,7 @@
     {% endif %}
 
   </nav>
+  {% endif %}
 </div>
 
 {% schema %}
