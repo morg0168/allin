@@ -5,10 +5,10 @@
 {%- assign collection = collections[section.settings.collection] -%}
 
 <div class="{{ 'section.settings.title' | handleize }}">
-  <div class="grid">
+  <div class="row middle-xs">
 
   {% for product in collection.products limit: 6 %}
-  <div class="grid__item one-half">
+  <div class="col-xs-12 col-sm-6 start-xs">
     <a href="{{ product.url | within: collection }}">
 
       {% if product.featured_image != blank %}
