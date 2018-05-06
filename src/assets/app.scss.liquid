@@ -184,7 +184,7 @@ html {
 * {
   font-family: 'Maison Neue Regular', sans-serif;
   color:black;
-  font-size:12px;
+  font-size:11px;
 }
 
 /**
@@ -205,6 +205,15 @@ html {
     padding-top: 0;
     height: 100%;
     width: 100%;
+    line-height: 1.42857143;
+    font-size:11px;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    .logo_text {
+      font-size: 5rem;
+      margin-bottom: 6rem;
+      margin-top: 0;
+    }
     main {
       margin-left: 0;
       margin-right: 0;
@@ -212,13 +221,21 @@ html {
     }
     #temporary-home {
       min-height: 100vh;
-      padding: 20vh;
+      padding: 10vh;
       margin: 0 auto;
       max-width: 1180px;
-      > .row {
+      > .row:first-of-type {
+            // padding-bottom: 6rem;
       }
       p {
         margin:0;
+      }
+      .footer-info {
+        position: absolute;
+        bottom: 2rem;
+        width: 100%;
+        left: 0;
+        margin: 0 auto;
       }
     }
 }
