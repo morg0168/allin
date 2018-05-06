@@ -65,16 +65,20 @@
   {{ content_for_header }}
 </head>
 
-<body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+{% if template == 'index' %}
+<body id="{{ page_title | handle }}" class="template-{{ template.name | handle }} row middle-xs">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-{% if template == 'index' %}
-<main role="main" id="MainContent" class="">
+<main role="main" id="MainContent" class="col-xs-12">
   {{ content_for_layout }}
 </main>
 {% else %}
   {% section 'header' %}
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+
+    <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
   <main role="main" id="MainContent" class="row middle-xs">
     {{ content_for_layout }}
   </main>

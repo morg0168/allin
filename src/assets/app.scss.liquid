@@ -215,7 +215,7 @@ html {
       }
       font-size: 5rem;
       // margin-bottom: 6rem;
-      margin-top: 0;
+      // margin-top: 0;
       color: transparent;
       background: linear-gradient(to right, #fff 40%, #000 10%);
       background: -webkit-linear-gradient(to right, #fff 40%, #000 10%);
@@ -226,12 +226,17 @@ html {
       margin-left: 0;
       margin-right: 0;
       min-height:100vh;
+      @media only screen and (min-width:85em){
+        padding-top:10vh;
+      }
+      .shopify-section-temporary-home {
+        min-height:100vh;
+      }
     }
     #temporary-home {
-      min-height: 100vh;
       padding:2vh;
       @media only screen and (min-width:48em){
-          padding: 5vh;
+          // padding: 5vh;
       }
       margin: 0 auto;
       max-width: 1280px;
