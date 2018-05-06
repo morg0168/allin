@@ -69,11 +69,16 @@
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
+{% if template == 'index' %}
+<main role="main" id="MainContent" class="">
+  {{ content_for_layout }}
+</main>
+{% else %}
   {% section 'header' %}
-
   <main role="main" id="MainContent" class="row middle-xs">
     {{ content_for_layout }}
   </main>
+  {% endif %}
 
   {% section 'footer' %}
 

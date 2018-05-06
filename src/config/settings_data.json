@@ -30,6 +30,12 @@
         },
         "featured-product": {
           "type": "featured-product"
+        },
+        "temporary-home": {
+          "type": "temporary-home",
+          "settings": {
+            "collection":"frontpage"
+          }
         }
       },
       "content_for_index": [
