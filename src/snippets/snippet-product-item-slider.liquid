@@ -1,0 +1,70 @@
+{% assign product_slider = false %}
+{% if snippet-product-item == 'product-slider' %}
+  {% assign product_slider = true %}
+{% endif %}
+
+        {% assign title_parts  = product.title | split: ' - ' %}
+        {% assign product_type_split  = product.title | split: ' - ' %}
+        
+        {% assign current_product_title_parts  = product.title | split: ' - ' %}
+        {% assign current_product_frame_color  = product_type_split[1] %}
+        {% assign current_product_lens_color  = product_type_split[2] %}
+
+
+        {% assign product_type  = product_type_split[0] %}
+        {% assign product_frame_color  = product_type_split[1] %}
+        {% assign product_lens_color  = product_type_split[2] %}
+
+        {% assign main_current_product_title = current_product_title | split: ' - ' %}
+      
+
+        {% if (main_current_product_title[3] == 'yellow' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'smoke') %}
+
+        {% elsif (main_current_product_title[3] == 'yellow' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'blue') %}
+
+        {% elsif (main_current_product_title[3] == 'black' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'blue') %}
+
+        {% elsif (main_current_product_title[3] == 'black' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'yellow') %}
+
+        {% elsif (main_current_product_title[3] == 'smoke' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'blue') %}
+
+        {% elsif (main_current_product_title[3] == 'smoke' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'yellow') %}
+
+        {% elsif (main_current_product_title[3] == 'blue' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'black' and current_product_title_parts[1] == 'clear') %}
+
+        {% elsif (main_current_product_title[3] == 'blue' and main_current_product_title[2] == 'sun-lenses' and current_product_title_parts[3] == 'yellow' and current_product_title_parts[1] == 'smoke') %}
+
+        {% else %}
+
+          {% if current_product_title == product.title %}
+
+            <li class="active">
+
+          {% else %}
+
+          <li>
+
+          {% endif %}
+      
+          <!-- Related glasses -->
+          <a href="{{ product.url }}">
+           
+            {% if title_parts.size > 1 %}
+
+            {% if main_current_product_title[1] == 't-shirt' %}
+ 
+              {{ title_parts[0] }}
+
+            {% else %}
+
+              {{ title_parts[1] }}
+
+            {% endif %}
+
+            {% endif %}
+
+          </a>
+
+          </li>
+
+        {% endif %}

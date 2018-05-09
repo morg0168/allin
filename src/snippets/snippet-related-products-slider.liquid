@@ -1,0 +1,40 @@
+
+{% assign number_of_related_products_to_show = settings.product-similar-products-amount | to_number %}
+
+{% capture number_of_related_products_to_fetch %}{{ number_of_related_products_to_show | plus: 1 }}{% endcapture %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+  {% assign found_a_collection = false %}
+  {% for c in product.collections %}
+    {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign current_product_frame_option_of_lens_split  = product.title | split: ' - ' %}
+{% assign current_product_frame_color_option_of_lens  = product_frame_option_of_lens_split[2] %}
+{% assign current_product_title  = product.title %} 
+{% assign current_main_product_title_parts  = product.title | split: ' - ' %}
+
+{% if collection and collection.products_count > 1 %}
+
+      {% assign current_product = product %}
+      {% assign current_product_found = false %}
+      {% for product in collection.products  %}
+
+            {% assign product_frame_option_of_lens_split  = product.title | split: ' - ' %}
+            {% assign product_frame_option_of_lens  = product_frame_option_of_lens_split[2] %}
+            
+            {% comment %}Si le frame color du current est égale à celui dans la loop
+                         Si oui on affiche le snippet{% endcomment %}
+            {% if current_product_frame_option_of_lens_split[2] == product_frame_option_of_lens_split[2] %}
+
+            {% include 'snippet-product-item-slider' with current_product_title %}
+            
+            {% endif %}
+
+      {% endfor %}
+
+{% endif %}

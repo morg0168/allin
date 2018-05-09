@@ -1,0 +1,22 @@
+{% assign product_slider = false %}
+{% if snippet-product-item == 'product-slider' %}
+  {% assign product_slider = true %}
+{% endif %}
+
+{% comment %}{% unless product.available %} sold-out{% endunless %}{% endcomment %}
+      
+      
+      <li>
+        {% assign title_parts  = product.title | split: ' - ' %}
+        <a href="{{ product.url }}">
+          {% if title_parts.size > 1 %}
+          {{ title_parts[1] }}
+          {% endif %}
+        </a>
+      </li>
+
+      {% if settings.collections-brand-show %}
+        <p class="vendor">{{ product.vendor | link_to: vendor_url }}</p>
+      {% endif %}
+
+

@@ -1,0 +1,36 @@
+{% assign product_slider = false %}
+{% if snippet-product-item == 'product-slider' %}
+  {% assign product_slider = true %}
+{% endif %}
+
+{% comment %}{% unless product.available %} sold-out{% endunless %}{% endcomment %}
+
+{% assign title_parts  = product.title | split: ' - ' %}
+{% assign product_type_split  = product.title | split: ' - ' %}
+{% assign product_type  = product_type_split[0] %}
+
+  {% if product_type == 'cap'%}
+    <!-- Related cap -->
+    <a href="{{ product.url }}">
+
+      {% if title_parts.size > 1 %}
+
+      {{ title_parts[1] }} / {{ title_parts[2] }}
+
+      {% endif %}
+
+    </a>
+
+  {% else %}
+    <div class="swiper-slide">
+    <!-- Related glasses -->
+    <a href="{{ product.url }}">
+      
+      <img src="{{ product.featured_image.src | product_img_url: "large" }}" alt="">
+
+    </a>
+    </div>
+  {% endif %}
+
+</li>
+

@@ -1,0 +1,55 @@
+body { padding: 0; font-family:  "Karla" ; color: #000000; }
+
+html, body { /* */ background: #ffffff; /* */ }
+
+a, a:link, a:visited { color: #000000; }
+
+a:hover { color: #444444; }
+
+#container { width: 100%; margin: 0 auto; }
+
+h3, .group h3 { color: #000000; text-shadow: none; }
+
+.form td { padding: 8px 5px; }
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea { font-size: emCalc(12px); -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; background: #ffffff; color: #000000; border: 1px solid #ebebeb; letter-spacing: 0.8px; }
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus { background: #ffffff; color: #000000; border: 1px solid #ebebeb; }
+
+input[type="button"], input[type="submit"] { background: #000000; color: #ff0000; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; font-family:  "Karla" ; font-weight: 300 !important; font-size: emCalc(12px) !important; text-transform: uppercase; border: 0; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; padding: 12px 24px !important; }
+input[type="button"]:hover, input[type="submit"]:hover { background: #777777; }
+
+.group, #email { background: #ffffff !important; border-color: #ebebeb !important; }
+
+/*  Info Bar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#info-bar { background: #ffffff; color: #000000; border-bottom: none; text-align: center; padding: 5px 0; position: relative; left: 0; top: 0; font-size: 60%; width: 100%; }
+
+/*  Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#container.slim #header { background: none; }
+
+#header { width: 100%; background: none; padding: 0 5px; }
+#header #logo { display: block; margin: 0 auto; background: url(//cdn.shopify.com/s/files/1/0525/3729/t/26/assets/logo_medium.png?13074888115304433637) 50% 50% no-repeat; height: 240px; width: 240px; /* */ }
+#header #tagline { /*  */ display: none; /* */ }
+#header #tagline .title { font-family:  "Karla" ; font-size: 28px; margin: 0; text-align: center; display: block; color:  #000000 ; padding: 50px 0; }
+#header #tagline .title a { color:  #000000 ; display: inline-block; bottom: 5px; left: 0; }
+#header #tagline .subtitle { display: none; }
+
+/*  Content
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#container.slim #main { background: none; }
+
+#main { margin: 0 auto 30px; background: none; }
+#main #overview { background: #ffffff; border: 1px solid #ebebeb; padding: 10px; margin: 10px; }
+#main #overview h2 { color: #000000; }
+#main #cost, #main #order-num { text-shadow: none; }
+#main #products { float: left; width: 480px; border-right: 1px solid #ebebeb; }
+#main #products #thumbs span { color: #000000; }
+#main #products #thumbs div { border: 0; }
+#main #cost { color: #000000; font-family:  "Karla" ; }
+#main .group h3, #main .pgroup h3, #main label { font-weight: normal; }
+#main #buttons { background: none; border: 0; }
+
+/*  Footer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#footer { background: none; padding: 0 0 60px; color: #000000; }

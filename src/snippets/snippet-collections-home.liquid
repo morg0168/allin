@@ -1,0 +1,344 @@
+<div class="options-wrapper">
+
+  <div class="white-bg-block">
+
+    <h2 class="shop-btn half-btn active">frames</h2>
+    <h2 class="shop-btn half-btn last-shop-btn">others</h2>
+
+  </div>
+
+  <div class="white-bg-block last-white-bg-block">
+
+    <h2 id="all-toggle" class="shop-btn third-btn active toggle-types">all</h2>
+    <h2 id="sunlenses-toggle" class="shop-btn third-btn toggle-types">sun-lenses</h2>
+    <h2 id="optical-toggle" class="shop-btn third-btn last-shop-btn toggle-types">optical</h2>
+
+  </div>
+
+</div>
+
+<div id="lens-box-desktop" class="lens-box main-wrapper home-shop">
+
+<div class="collection-wrapper">
+
+
+{% comment %}      <div class="goggles" style="left:0px;">
+
+
+      <div style="background-image: url(//cdn.shopify.com/s/files/1/0525/3729/products/black-01_1024x1024.png?v=1476575918)" class="goggle-thumb -type active-glasses">
+
+            <span class="overlay-white">
+
+              <div class="goggles-block centered-table">
+
+                <div>
+
+
+
+                    <p class="text-centered">black/orange - t-shirt</p>
+
+
+
+                  <p class="text-centered">$30.00</p>
+
+                  <a href="/products/black-orange-t-shirt" class="black-btn view-goggles">view this product</a>
+
+                </div>
+
+              </div>
+
+            </span>
+
+      </div>
+    </div>{% endcomment %}
+
+
+{% comment %}      <div class="goggles" style="left:0px;">
+
+
+      <div style="background-image: url(//cdn.shopify.com/s/files/1/0525/3729/products/orange-01_1024x1024.png?v=1476576560)" class="goggle-thumb -type active-glasses">
+
+            <span class="overlay-white">
+
+              <div class="goggles-block centered-table">
+
+                <div>
+
+
+
+                    <p class="text-centered">orange/yellow - t-shirt</p>
+
+
+
+                  <p class="text-centered">$30.00</p>
+
+                  <a href="/products/orange-yellow-t-shirt" class="black-btn view-goggles">view this product</a>
+
+                </div>
+
+              </div>
+
+            </span>
+
+      </div>
+
+    </div>{% endcomment %}
+
+
+
+    </div>
+
+  {% for link in linklists.all-collections.links %}
+
+    {% assign collection = link.object %}
+    {% assign collectionname  = collection.title %}
+
+
+    <div class="collection-wrapper">
+
+    {% for product in collection.products %}
+      <div class="goggles" style="left:0px;">
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+
+      <div style="background-image: url({{ product.featured_image.src | product_img_url: "original" }})" class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '/' }}-type active-glasses">
+
+            <span class="overlay-white">
+
+              <div class="goggles-block centered-table">
+
+                <div>
+
+                  {% if product_lens_options[2] == 'sun-lenses' %}
+
+                    <p class="text-centered">{{ product_lens_options[0] }} - {{ product_lens_options[1] }} - {{ product_lens_options[3] }}</p>
+
+                  {% else %}
+
+                    <p class="text-centered">{{product.title}}</p>
+
+                  {% endif %}
+
+                  <p class="text-centered">{{product.price | money}}</p>
+
+                  <a href="{{product.url}}" class="black-btn view-goggles">view this product</a>
+
+                </div>
+
+              </div>
+
+            </span>
+
+      </div>
+    </div>
+
+    {% endfor %}
+
+    </div>
+
+  {% endfor %}
+
+</div>
+
+<div id="lens-box-mobile"  class="lens-box" style="display:none;">
+
+<div class="collection-wrapper ">
+
+
+      <div class="goggles" style="left:0px;">
+
+
+      <div style="background-image: url(//cdn.shopify.com/s/files/1/0525/3729/products/black-01_1024x1024.png?v=1476575918)" class="goggle-thumb -type active-glasses">
+
+            <span class="overlay-white">
+
+              <div class="goggles-block centered-table">
+
+                <div>
+
+
+
+                    <p class="text-centered">black/orange - t-shirt</p>
+
+
+
+                  <p class="text-centered">$30.00</p>
+
+                  <a href="/products/black-orange-t-shirt" class="black-btn view-goggles">view this product</a>
+
+                </div>
+
+              </div>
+
+            </span>
+
+      </div>
+    </div>
+
+
+      <div class="goggles" style="left:0px;">
+
+
+      <div style="background-image: url(//cdn.shopify.com/s/files/1/0525/3729/products/orange-01_1024x1024.png?v=1476576560)" class="goggle-thumb -type active-glasses">
+
+            <span class="overlay-white">
+
+              <div class="goggles-block centered-table">
+
+                <div>
+
+
+
+                    <p class="text-centered">orange/yellow - t-shirt</p>
+
+
+
+                  <p class="text-centered">$30.00</p>
+
+                  <a href="/products/orange-yellow-t-shirt" class="black-btn view-goggles">view this product</a>
+
+                </div>
+
+              </div>
+
+            </span>
+
+      </div>
+    </div>
+
+
+
+    </div>
+
+  {% assign j = 0 %}
+  {% for link in linklists.all-collections.links %}
+  {% assign collection = link.object %}
+
+    {% assign collectionname  = collection.title %}
+
+    {% if collectionname != 'outerwear' and collectionname != "caps" %}
+
+    <!-- goggles -->
+    <h2 class="text-centered text-goggle">{{ collection.title }}</h2>
+
+    <span style="width:100%;display:inline-block;font-size:9px;margin-bottom: 15px;" class="text-centered text-goggle">swipe for other colors</span>
+
+    <!-- japon -->
+    <div class="goggles swiper-container-japon japon japon-to-hide-{{ j }}" style="left:0px;display:none;">
+      <div class="swiper-wrapper japon">
+      {% for product in collection.products %}
+
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+
+        {% if product_lens_options[0] == 'japon' %}
+
+        <div class="swiper-slide">
+
+          <a class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '/' }}" href="{{product.url}}">
+
+            <div class="goggles-block">
+
+              <img src="{{ product.featured_image.src | product_img_url: "original" }}" alt="">
+
+              <span class="product-title-hover">{{ product.title }}</span>
+
+            </div>
+
+          </a>
+
+        </div>
+
+        {% else %}
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+
+    <!-- voltaire -->
+    <div class="goggles swiper-container-voltaire voltaire voltaire-to-hide-{{ j }}" style="left:0px;">
+      <div class="swiper-wrapper voltaire">
+
+      {% for product in collection.products %}
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+
+      {% if product_lens_options[0] == 'voltaire' %}
+      <div class="swiper-slide">
+      <a class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" href="{{product.url}}">
+
+        <div class="goggles-block">
+
+          <img src="{{ product.featured_image.src | product_img_url: "original" }}" alt="">
+
+          <span class="product-title-hover">{{ product.title }}</span>
+
+        </div>
+
+      </a>
+      </div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+
+    <!-- dunk4 -->
+    <div class="goggles swiper-container-dunk4 dunk4 dunk4-to-hide-{{ j }}" style="left:0px;">
+      <div class="swiper-wrapper dunk4">
+
+      {% for product in collection.products %}
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+
+      {% if product_lens_options[0] == 'dunk4' %}
+      <div class="swiper-slide">
+      <a class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" href="{{product.url}}">
+
+        <div class="goggles-block">
+
+          <img src="{{ product.featured_image.src | product_img_url: "original" }}" alt="">
+
+          <span class="product-title-hover">{{ product.title }}</span>
+
+        </div>
+
+      </a>
+      </div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+
+    <!-- york -->
+    <div class="goggles swiper-container-york york york-to-hide-{{ j }}" style="left:0px;">
+      <div class="swiper-wrapper york">
+
+      {% for product in collection.products %}
+
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+
+      {% if product_lens_options[0] == 'york' %}
+      <div class="swiper-slide">
+      <a class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" href="{{product.url}}">
+
+        <div class="goggles-block">
+
+          <img src="{{ product.featured_image.src | product_img_url: "original" }}" alt="">
+
+          <span class="product-title-hover">{{ product.title }}</span>
+
+        </div>
+
+      </a>
+      </div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+
+    {% endif %}
+
+    {% assign j = j | plus: 1 %}
+
+  {% endfor %}
+
+</div>

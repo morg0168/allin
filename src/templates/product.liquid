@@ -1,1 +1,460 @@
-{% section 'product' %}
+{% assign title_product_part  = product.title | split: ' - ' %}
+
+<span class="back-to-shop-side"><a href="http://www.allineyewear.com/collections/">back to shop</a></span>
+
+<span class="visible-mobile h1 text-centered">
+
+  {{ title_product_part[0] }} - {{ title_product_part[1] }}
+
+</span>
+
+<p class="visible-mobile text-centered h1-price">{{product.variants.first.price | money}} cad</p>
+
+<div id="main-slider" class="main-wrapper">
+
+  <div id="product-slider" class="inline-content">
+    
+    <div id="slider-container">
+
+      <div class="container clearfix">
+
+        <ul id="slider-list">
+
+          {% for image in product.images %}
+
+            <li>
+
+              <img src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt | escape }}" />
+            
+            </li>
+
+          {% endfor %}
+
+        </ul>   
+
+      </div><!-- #product-photo-container -->
+
+      {% comment %}<span class="text-centered visible-mobile bold" style="margin-top: -22px;">(swipe)</span>{% endcomment %}
+      
+    </div>
+
+  </div>
+
+<div class="side-carousel">
+
+  <div class="centered">
+
+    <div>
+      
+      <h1 class="product-title product-price-mobile text-left">
+
+        {{ title_product_part[0] }} - {{ title_product_part[1] }}
+
+      </h1>
+      
+      <form class="form-center" method="post" action="/cart/add">
+
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+
+        <input class="normal-buy-btn buy-now-mobile" type="submit" value="buy now" />
+
+        <p class="product-price product-price-mobile">{{product.variants.first.price | money}} cad</p>
+
+      </form>  
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<div id="product-infos-container">
+
+  <div id="product-info" class="inline-content full-mobile-half-desktop">
+
+    <div id="tech-btn" class="white-block-tech center">tech +</div>
+
+    <div class="hidden-desc">
+
+      <p>{{product.description}}</p>
+
+    </div>
+
+  </div>
+
+  <div id="product-options" class="inline-content full-mobile-half-desktop">
+
+      <form method="post" action="/cart/add">
+
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+
+        <input class="white-btn-link-to-gray" type="submit" value="buy" />
+
+      </form>
+
+      <div class="white-border-block center with-margin-top back-to-shop-with-over">
+        
+        <a href="http://www.allineyewear.com/collections/">back to shop</a>
+
+      </div>
+
+  </div>
+
+  <div id="product-footer">
+
+    {% assign product_type_split  = product.title | split: ' - ' %}
+    {% assign product_type  = product_type_split[0] %}
+
+    {% comment %} Frame Color {% endcomment %}
+    {% if product_type_split[2] == 'optical' or product_type_split[1] == 't-shirt' %}
+
+    <div class="half-wrapper">
+
+    {% else %}
+
+    <div class="third-wrapper"> 
+
+    {% endif %}
+      
+      {% if product_type_split[1] == 't-shirt' %}
+
+      <h2 class="product-title white-border-block center">color</h2>
+
+      {% else %}
+
+      <h2 class="product-title white-border-block center">frame color</h2>
+      
+      {% endif %}
+
+      <ul class="lens-options">
+
+      {% include 'snippet-related-products-slider' %}
+        
+      </ul>
+
+    </div>
+    
+    {% comment %} Lenses Optical/Sunlenses {% endcomment %}
+    {% if product_type_split[2] == 'optical'  or product_type_split[1] == 't-shirt' %}
+
+    <div class="half-wrapper vertical-top">
+
+    {% else %}
+
+    <div class="third-wrapper vertical-top">
+
+    {% endif %}
+      
+
+      {% if product_type_split[1] == 't-shirt' %}
+        
+        <h2 class="product-title white-border-block center">sizes</h2>
+
+
+        <ul class="lens-options size-options">
+
+          {% for variant in product.variants %}
+            <li {% if variant == product.selected_or_first_available_variant %} class="active sizes product-title white-border-block center" {% endif %} class="sizes product-title white-border-block center" value="{{ variant.id }}">{{ variant.title }}</li>
+          {% endfor %}
+
+        </ul>
+
+      {% else %}
+
+      <h2 class="product-title white-border-block center">lenses</h2>
+      
+      {% endif %}
+
+      <ul class="lens-options">
+
+        {% if product_type_split[1] == 't-shirt' %}
+
+        
+
+        {% else %}
+
+
+        {% include 'snippet-related-products-lenses-slider' %}
+
+        {% if product_type_split[2] == 'optical' and product_type_split[0] == 'dunk4'  %}
+
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/dunk-4-clear-black">sun-lenses</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'york' %}
+
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/york-black-sun-lenses-black">sun-lenses</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'voltaire' %}
+
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/voltaire-black-sun-lenses-black">sun-lenses</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'optical' and product_type_split[0] == 'japon' %}
+
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/japon-{{ product_type_split[1] }}-black">sun-lenses</a>
+
+        </li>
+
+        {%else%}
+
+        {% endif %}
+
+        {% if product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'dunk4' %}
+        
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/dunk-4-black-optical">optical</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'japon' %}
+        
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/japon-black-optical">optical</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'york' %}
+
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/york-black-optical">optical</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'voltaire' %}
+
+        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/voltaire-black-optical">optical</a>
+
+        </li>
+
+        {% elsif product_type_split[2] == 'sun-lenses' and product_type_split[0] == 'japon' %}
+
+{% comment %}        <li>
+
+          <!-- Related glasses -->
+          <a href="/products/japon-black-optical">optical</a>
+
+        </li>{% endcomment %}
+
+        {%else%}
+
+        {% endif %}
+
+
+
+        
+        {% endif %}
+
+      </ul>
+
+    </div>
+    
+    {% comment %} Lens color {% endcomment %}
+    {% if product_type_split[3] == blank %}
+
+    {% else %}
+    
+    <div class="third-wrapper vertical-top">
+      
+      <h2 class="product-title white-border-block center">Lens color</h2>
+
+      <ul class="lens-options">
+
+        {% include 'snippet-related-products-lens-color-slider' %}
+
+      </ul>
+
+    </div>
+
+    {% endif%}
+
+    </div>
+    
+  </div>
+
+</div><!-- end #product-info-container -->
+
+<div id="main-slider-mobile" style="display:none;" class="main-wrapper">
+
+  <div id="product-slider-mobile" class="inline-content">
+    
+    <div id="slider-container">
+    
+      {% comment %}Loop that shows all pictures{% endcomment %}
+
+      <div class="container clearfix">
+        <ul id="slider-list-mobile">
+          {% for image in product.images %}
+
+            {% if image.position > 1 %}
+
+            <li>
+              <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ image.alt | escape }}" />
+            </li>
+
+            {% endif %}
+
+          {% endfor %}
+        </ul>    
+      </div><!-- #product-photo-container -->
+      
+    </div>
+
+  </div>
+
+  <div id="product-options-mobile" class="inline-content">
+    
+    {% assign product_type_split  = product.title | split: ' - ' %}
+    {% assign product_type  = product_type_split[0] %}
+    
+    {% if product_type == 'cap'%}
+
+    {% else %}
+
+    <ul class="lens-options">
+      {% include 'snippet-related-products-lens-slider' %}
+    </ul>
+  
+    {% endif %}
+
+  </div>
+
+  <div id="product-info-mobile" class="inline-content">
+    
+    {% assign title_product_parts  = product.title | split: ' - ' %}
+    <h1 class="product-title ">
+      {% if title_product_parts.size > 1 %}
+      {{ title_product_parts[0] }} - 
+      {{ title_product_parts[1] }}
+      {% endif %}
+    </h1>
+    
+    {% for variant in product.variants %}
+
+      <p class="product-price">{{product.variant.first.price | money}} CAD</p>
+
+    {% endfor %}
+
+    <p>{{product.description}}</p>
+
+    <form method="post" action="/cart/add">
+
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+
+      <input class="black-btn" type="submit" value="buy now" />
+
+    </form>  
+
+    <div id="free-shipping">
+      
+      <p><span style="height: 13px;display: inline-block;vertical-align: bottom;">free worldwide shipping</span><img src="{{ 'worldwide.png' | asset _url }}" /></p>
+      
+    </div>
+
+    <h2 class="text-centered">swipe for other colors</h2>
+
+    <ul class="lens-options">
+
+      <li class="active hidden">
+
+          {% assign title_product_parts  = product.title | split: ' - ' %}
+          
+          <a href="#">
+
+            {% if title_product_parts.size > 1 %}
+            {% if product_type == 'cap'%}
+            
+            {{ title_product_parts[1] }} / {{ title_product_parts[2] }}
+  
+            {% else %}
+
+            {{ title_product_parts[1] }}
+
+            {% endif %}
+            
+            {% endif %}
+
+          </a>
+
+      </li>
+
+      {% include 'snippet-related-products-slider-mobile' %}
+
+    </ul>
+    
+  </div>
+
+</div>
+
+<div class="row" style="display:none;">
+  
+  <div class="middle-column photos left columns small-12 large-6 large-centered small-centered show-for-medium-up show-for-ie9-down">
+    {% if product.images.size == 0 %}
+    
+      <div id="product-slider" class="container clearfix">
+        <a class="photo" href="{{ image.src | product_img_url: '1024x1024' }}" data-zoom="{{ image.src | product_img_url: '1024x1024' }}">
+          <img src="{{ '' | product_img_url: 'grande' }}" data-zoom="{{ image.src | product_img_url: '1024x1024' }}" alt="" />
+        </a>
+      </div><!-- #product-photo-container -->
+      
+    {% else %}
+      
+      <div class="container clearfix">
+        {% for image in product.images %}
+        <a class="photo" href="{{ image.src | product_img_url: '1024x1024' }}" data-zoom="{{ image.src | product_img_url: '1024x1024' }}" rel="gallery">
+          <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ image.alt | escape }}" />
+        </a>
+        {% endfor %}
+      </div><!-- #product-photo-container -->
+      
+    {% endif %}
+
+  </div><!-- #product-photos -->
+
+</div>
+
+{% if settings.product-share-this-show %}
+<section class="row social-share">
+  <div class="columns">e
+    {% include 'snippet-product-share' with 'product-template' %}
+  </div>
+</section>
+{% endif %}
+
+{% if settings.product-modal-enabled %}
+<div class="modal">
+  <div class="loading"></div>
+  <a aria-hidden="true" class="prev glyph slider-left"></a>
+  <a aria-hidden="true" class="close glyph cross"></a>
+  <a aria-hidden="true" class="next glyph slider-right"></a>
+  <div class="slides"></div>
+</div>
+<div class="modal-mask"></div>
+{% endif %}

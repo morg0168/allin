@@ -1,0 +1,736 @@
+@font-face {
+  font-family: 'MaisonNeue-Bold';
+  src: url('{{ 'MaisonNeue-Bold.eot?#iefix' | asset_url }}') format('embedded-opentype'),  url('{{ 'MaisonNeue-Bold.otf' | asset_url }}')  format('opentype'),
+	     url('{{ 'MaisonNeue-Bold.woff' | asset_url }}') format('woff'), url('{{ 'MaisonNeue-Bold.ttf' | asset_url }}')  format('truetype'), url('{{ 'MaisonNeue-Bold.svg#MaisonNeue-Bold' | asset_url }}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MaisonNeue-Medium';
+  src: url({{'MaisonNeue-Medium.eot?#iefix' | asset_url }}) format('embedded-opentype'),  url({{'MaisonNeue-Medium.otf' | asset_url }})  format('opentype'),
+	     url({{'MaisonNeue-Medium.woff' | asset_url }}) format('woff'), url({{'MaisonNeue-Medium.ttf' | asset_url }})  format('truetype'), url({{'MaisonNeue-Medium.svg#MaisonNeue-Medium' | asset_url }}) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* General */
+
+body {
+  background: white;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#closing-template {
+  font-family: 'MaisonNeue-Medium' !important;
+  font-size: 11px;
+  background: white;
+}
+
+#footer {
+  font-family: 'MaisonNeue-Medium' !important;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  padding: 0;
+}
+.row {
+  margin: 0;
+}
+
+li a {
+	color: #f60300;
+    text-decoration: none;
+  	cursor: pointer;
+}
+
+li a:focus, li a:hover {
+    color: #f60300;
+    text-decoration: none;
+}
+
+.preview-capsule a {
+	color: #f60300;
+    text-decoration: none;
+  	cursor: pointer;
+}
+
+#footer a:focus, #footer a:hover {
+    color: #f60300;
+    text-decoration: none;
+}
+
+#footer a {
+	color: #f60300;
+    text-decoration: none;
+  	cursor: pointer;
+}
+
+.preview-capsule a:focus, .preview-capsule a:hover {
+    color: #f60300;
+    text-decoration: none;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.col,[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+/* Header */
+
+#header {
+  color: #f60300;
+  margin-top: 50px;
+}
+
+/* Content */
+
+.img-holder img {
+    width: 100%;
+    max-width: 385px;
+}
+
+.logo-holder img {
+    width: 75%;
+    position: relative;
+    bottom: -75px;
+    display: block;
+    margin: 0 auto;
+    float: left;
+}
+
+.preview-capsule {
+  display: flex;
+  color: #f60300;
+  position: relative;
+}
+
+.preview-capsule img {
+    width: 6px;
+    height: 55px;
+    position: absolute;
+    left: 400px;
+    top: 5px;
+}
+
+#stockists {
+  color: #f60300;
+  margin-bottom: 30px;
+}
+#dealers-holder {
+  display: flex;
+  color: #f60300;
+  margin-bottom: 150px;
+}
+#dealer-list-1 {
+  text-transform: uppercase;
+}
+.dealers {
+  width: 50%;
+}
+.transparent {
+  visibility: hidden;
+}
+/* footer */
+.full {
+  background: white;
+  margin-top: 50px;
+}
+
+#footer-holder {
+  color: #f60300;
+  font-size: 11px;
+}
+#footer {
+  margin: 20px 0;
+}
+.float-left {
+  float: right;
+}
+.float-right {
+  float: right;
+  margin-right: 100px;
+}
+
+.page-capsule .float-right {
+    float: right;
+    margin-right: 100px;
+}
+
+.page-capsule .float-left {
+    float: right;
+}
+
+#second-haft-mobile {
+  display: none;
+}
+#first-haft-mobile {
+  display: none;
+}
+
+/* -- Slider --*/
+
+.glyphicon-chevron-left:before {
+  background: url({{ 'arrow-left.svg' | asset_url }}) no-repeat center 0px;
+  background-size: 30px;
+  color: transparent;
+}
+
+.glyphicon-chevron-right:before {
+  background: url({{ 'arrow-right.svg' | asset_url }}) no-repeat center 0px;
+  background-size: 30px;
+  color: transparent;
+}
+
+.carousel {
+    position: relative;
+    width: 476px;
+    margin: 0 auto;
+}
+
+.carousel-control {
+  opacity: 1;
+  text-shadow: none;
+}
+
+.carousel-control.right {
+  background-image: none;
+  right: -30px;
+}
+
+.carousel-control.left {
+  background-image: none;
+  left: -30px;
+}
+
+.page-capsule #logo {
+  width: 80px;
+  margin-top: 80px;
+}
+
+.page-capsule .container {
+  margin: 0 auto;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/* Rest of Capsule page */
+
+.page-capsule h3 {
+  font-family: 'MaisonNeue-Medium' !important;
+  font-size: 11px;
+  color: #ED3230;
+  margin-bottom: 60px
+}
+
+.page-capsule .right-text p {
+  font-family: 'MaisonNeue-Medium' !important;
+  margin-bottom: 20px;
+  font-size: 11px;
+  color: #ED3230;
+}
+
+.page-capsule .right-text {
+    position: relative;
+    top: -44px;
+  	width: 300px;
+}
+
+.page-capsule .back a {
+    display: flex;
+    font-family: 'MaisonNeue-Medium' !important;
+    font-size: 11px;
+    color: #ED3230;
+    position: fixed;
+    bottom: 27%;
+}
+
+_::-webkit-full-page-media, _:future, :root .back-text {
+
+    position: relative;
+    top: -50px;
+
+
+}
+
+_::-webkit-full-page-media, _:future, :root #closing-template .skip img {
+
+    top: 3px;
+
+
+}
+
+     #intro #mobilevid {
+     	display: none;
+     }
+
+.carousel-indicators {
+  display: none;
+}
+
+.page-capsule .back img {
+  width: 25px;
+  position: relative;
+  top: -50px;
+}
+
+.page-capsule .slide-number {
+  position: relative;
+  left: 69px;
+  top: -25px;
+  color: #ED3230;
+  font-family: 'MaisonNeue-Medium' !important;
+  font-size: 11px;
+}
+
+
+#closing-template .skip a {
+    display: flex;
+    position: fixed;
+    font-family: 'MaisonNeue-Medium' !important;
+    font-size: 11px;
+    color: #ED3230;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+  	z-index: 99999;
+}
+
+#closing-template .skip-mobile a {
+    display: flex;
+    font-family: 'MaisonNeue-Medium' !important;
+    font-size: 11px;
+    color: #ED3230;
+    text-decoration: none;
+}
+
+#intro #footer {
+  display: none;
+}
+
+#intro #video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+#closing-template .skip img {
+    width: 25px;
+    position: relative;
+    top: -41px;
+    right: -5px;
+}
+
+#intro video {
+    width: 87vw;
+    margin-top: -7px;
+}
+
+#intro #footer ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+#intro {
+    width: 100% !important;
+    height: 100vh;
+    background: black;
+}
+
+#intro #footer li {
+    width: 19%;
+}
+
+#intro .closer-look-inner {
+  display: flex;
+  font-family: 'MaisonNeue-Medium' !important;
+  font-size: 11px;
+  color: #ED3230;
+  width: 100%;
+  position: relative;
+}
+
+#intro .closer-look-inner p:first-child {
+  margin-bottom: 10px;
+}
+
+#intro .closer-look img {
+    width: 25px;
+    height: 30px;
+    position: absolute;
+    top: -9px;
+    right: 0px;
+}
+
+#intro .closer-look {
+  margin-top: 15px;
+}
+
+#logo-all-in {
+  width: 278px;
+  margin-bottom: 60px;
+}
+
+.axel {
+  width: 90px
+}
+.template-index p {
+  font-size: 11px;
+  color: #f60300;
+  font-family: 'MaisonNeue-Medium' !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  letter-spacing: -0.5px;
+}
+
+.template-index #capsule-content p {
+  margin-bottom: 30px;
+}
+
+.template-index #capsule-content #last {
+  margin-bottom: 70px;
+}
+
+.template-index .img-holder {
+  float: right;
+}
+
+.template-index .skip-content {
+  text-align: center;
+}
+
+#second-haft-mobile #capsule-content .logo-holder {
+  margin-bottom: 60px;
+}
+
+.template-index #first-haft-mobile .img-holder {
+  float: none;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-capsule #footer-holder {
+  color: #f60300;
+  font-size: 11px;
+  position: relative;
+  left: 40px;
+  bottom: -80px;
+}
+
+
+
+
+
+
+
+/* Responsive */
+
+/* Large Devices, Wide Screens */
+   @media only screen and (min-width : 1800px) {
+	#closing-template {
+    font-family: 'MaisonNeue-Medium' !important;
+    font-size: 11px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	}
+
+  }
+
+@media only screen and (min-width : 1500px) {
+
+	.page-capsule #footer-holder {
+    color: #f60300;
+    font-size: 11px;
+    position: relative;
+    left: 40px;
+    bottom: -80px;
+	}
+}
+
+  @media only screen and (max-width : 1199px) {
+    .page-capsule .slide-number {
+    left: 49px;
+  }
+    #intro video {
+    width: 96vw;
+	}
+  }
+
+  @media only screen and (max-width : 1199px) {
+    #intro #video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+  }
+
+   /* Medium Devices, Desktops */
+   @media only screen and (max-width : 992px) {
+     #closing-template {
+       font-size: 11px;
+     }
+     #footer-holder {
+       font-size: 11px;
+     }
+     .preview-capsule img {
+    	left: 300px;
+	}
+     .preview-capsule {
+     	float: left;
+     }
+	#stockists {
+	    position: relative;
+	    left: 170px;
+	}
+     .logo-holder img {
+        bottom: 0px;
+	}
+  .page-capsule #logo {
+      width: 80px;
+      margin-top: 80px;
+      margin-bottom: 80px;
+      margin-left: 70px;
+  }
+.page-capsule .slide-number {
+    left: 70px;
+}
+.page-capsule .float-right {
+    margin-right: 0px;
+}
+.page-capsule .float-left {
+    margin-right: -10px;
+}
+.carousel {
+    position: relative;
+    width: 476px;
+    margin: 0 auto;
+}
+.page-capsule h3 {
+    margin-bottom: 40px;
+}
+.page-capsule .right-text {
+    position: relative;
+    top: 0;
+    width: 700px;
+    margin: 0 auto;
+}
+.page-capsule .right-text {
+    position: relative;
+    top: 0;
+    width: 560px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+
+   }
+
+   /* Small Devices, Tablets */
+   @media only screen and (max-width : 767px) {
+     #intro #desktopvid {
+     	display: none;
+     }
+     #intro #mobilevid {
+     	display: block;
+     }
+     #second-haft-desktop {
+       display: none;
+     }
+     #header {
+     	display: none;
+     }
+     #first-haft-desktop img {
+     	display: none;
+     }
+     #second-haft-mobile {
+       display: block;
+       margin-bottom: 180px;
+     }
+     #first-haft-mobile {
+       display: block;
+     }
+     #closing-template {
+       font-size: 11px;
+       margin: 0 60px;
+     }
+     #footer-holder {
+       font-size: 11px;
+       margin: 0 60px;
+     }
+     #closing-template .skip img {
+    	width: 25px;
+    	position: relative;
+    	top: -45px;
+    	right: -5px;
+	}
+
+	.preview-capsule {
+	    margin-bottom: 40px;
+	    margin-top: 15px;
+	    margin-left: 60px;
+      	font-size: 11px;
+      	font-family: 'MaisonNeue-Medium' !important;
+	}
+    .preview-capsule img {
+    	display: block !important;
+    	right: -60px;
+    	width: 15px;
+    	height: 80px;
+      	left: initial;
+    }
+    .logo-holder img {
+      width: 85%;
+      display: block;
+      margin: 0 auto;
+      position: initial;
+      float: initial;
+    }
+    #dealer-list-1 {
+      width: 50%;
+    }
+    #dealer-list-2 {
+      width: 50%;
+    }
+    #dealer-list-3 {
+      text-align: right;
+      width: 25%;
+    }
+    .float-right {
+      float: left;
+      margin-top: 35px;
+    }
+    .float-left {
+      line-height: 0.8;
+    }
+    #footer {
+      margin: 60px 0;
+    }
+     #stockists {
+    position: initial;
+    margin-left: 0px;
+    margin-top: 30px;
+	}
+    .full {
+      margin-top: 0px;
+  }
+  .page-capsule #footer-holder {
+    font-size: 11px;
+    margin: 0 auto;
+  }
+  .page-capsule .float-left {
+  margin-right: 0px;
+  margin-left: 80px;
+  float: left;
+}
+.page-capsule .float-right {
+    margin-right: 0px;
+    float: left;
+    margin-left: 80px;
+}
+.carousel-control {
+    font-size: 30px;
+}
+.carousel {
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+}
+.page-capsule .slide-number {
+    left: 41px;
+}
+.page-capsule .right-text {
+    position: relative;
+    top: 0;
+    width: 320px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+}
+
+   /* Extra Small Devices, Phones */
+   @media only screen and (max-width : 612px) {
+     #closing-template {
+       font-size: 10px;
+       margin: 0 25px;
+      }
+     .preview-capsule {
+    	margin-bottom: 40px;
+    	margin-top: 15px;
+    	margin-left: 25px;
+    	font-size: 10px;
+    	font-family: 'MaisonNeue-Medium' !important;
+	  }
+     .preview-capsule img {
+          display: block !important;
+          right: -76px;
+          width: 9px;
+          height: 40px;
+          left: initial;
+      }
+      #header {
+        margin-top: 25px;
+      }
+      #second-haft-mobile {
+        margin-bottom: 120px;
+      }
+      #dealers-holder {
+        margin-bottom: 90px;
+      }
+      #footer-holder {
+        font-size: 10px;
+        margin: 0 25px;
+      }
+   }
+
+@media only screen and (max-width : 500px) {
+  .carousel {
+     position: relative;
+     width: 300px;
+     margin: 0 auto;
+  }
+  .carousel-control.left {
+     left: -20px;
+  }
+  .carousel-control.right {
+    right: -20px;
+  }
+  .page-capsule #logo {
+    margin-left: 35px;
+  }
+  .page-capsule .float-left {
+    margin-left: 35px;
+  }
+  .page-capsule .float-right {
+    margin-left: 35px;
+  }
+  .page-capsule .right-text {
+    position: relative;
+    top: 0;
+    width: 240px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+}

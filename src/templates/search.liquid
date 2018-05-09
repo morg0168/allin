@@ -1,81 +1,92 @@
-{% paginate search.results by 10 %}
+{% paginate search.results by settings.search-items-per-page %}
+<div class="row">
+  <div class="large-12 columns">
+    <h1 class="page-title">Search</h1>
+  </div>
+</div>
 
-  <h1>
-    {% if search.performed %}
-      {% if search.results_count == 0 %}
-        {{ 'general.search.no_results_html' | t: terms: search.terms }}
-      {% else %}
-        {{ 'general.search.results_for_html' | t: terms: search.terms }}
-      {% endif %}
-    {% else %}
-      {{ 'general.search.title' | t }}
-    {% endif %}
-  </h1>
-
-  <form action="/search" method="get" role="search">
-    <label for="Search" class="label-hidden">
-      {{ 'general.search.placeholder' | t }}
-    </label>
-    <input type="search"
-           name="q"
-           id="Search"
-           value="{{ search.terms | escape }}"
-           placeholder="{{ 'general.search.placeholder' | t }}">
-    <button type="submit" class="btn">
-      {% include 'icon-search' %}
-      <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-    </button>
-  </form>
-
-
-{% if search.performed %}
-    <ul>
-      {% for item in search.results %}
-        <li>
-          {% assign featured_image = item.image | default: item.featured_image %}
-          {% if featured_image != blank %}
-            <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-              {{ featured_image | img_url: '240x240' | img_tag: featured_image.alt }}
-            </a>
-          {% endif %}
-
-          <h5>{{ item.title | link_to: item.url }}</h5>
-
-          {% if item.object_type == 'product' %}
-            <p>
-              {% if item.compare_at_price > item.price %}
-                {% if item.price_varies %}
-                  {% assign sale_price = item.price | money %}
-                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                {% else %}
-                  {{ 'products.product.on_sale' | t }}
-                  <span itemprop="price">{{ item.price | money }}</span>
-                {% endif %}
-                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                <s>{{ item.compare_at_price | money }}</s>
-              {% else %}
-                {% if item.price_varies %}
-                  {% assign price = item.price | money %}
-                  <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
-                {% else %}
-                  <span itemprop="price">{{ item.price | money }}</span>
-                {% endif %}
-              {% endif %}
-              {% unless item.available %}
-              {{ 'products.product.sold_out' | t }}
-              {% endunless %}
-            </p>
-          {% else %}
-            <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-          {% endif %}
-
-        </li>
-      {% endfor %}
-    </ul>
-
-    {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
-    {% endif %}
+<div class="row">
+  <div class="columns">
+    <div class="divider"></div>
+  </div>
+</div>
+<div class="row summary narrow">
+  {% if search.terms != "" %}
+  <div class="large-4 columns">
+    <p>Search results for <strong>"{{ search.terms }}"</strong></p>
+  </div>    
   {% endif %}
+
+  <div class="large-4 columns">
+    <div class="searchbar-container">
+      <form  action="/search" method="get" role="search">
+        {% if settings.search-products-only %}<input type="hidden" name="type" value="product" />{% endif %}
+        <input name="q" type="text" placeholder="Search store..." class="hint text" value="{{ search.terms }}" />
+        {% comment %}<input type="submit" value="" name="submit" class="button prefix {{ settings.color-icons-theme }}" />{% endcomment %}
+        <button aria-hidden="false" class="glyph search"></button>
+      </form>
+    </div>
+  </div>
+
+  {% if search.terms != "" %}
+  <div class="large-4 columns">
+    <p><strong>{{ search.results.size }}</strong> results found</p>
+  </div>
+  {% endif %}
+</div>
+<div class="row">
+  <div class="columns">
+    <div class="divider results"></div>
+  </div>
+</div>
+
+{% if search.results != empty %}
+  
+  <!-- Begin results -->
+  {% if settings.search-products-only %}
+    <section class="row">
+      <div class="product-grid clearfix">
+        {% for product in search.results %}
+          {% include 'snippet-product-item' with '4' %}
+        {% endfor %}
+      </div>
+    </section>
+  {% else %} 
+  {% comment %} mixed results {% endcomment %}
+    {% for item in search.results %}
+      <div class="row results narrow">
+        <div class="large-4 columns text-center">
+          
+            <div class="thumbnail">
+              {% if item.featured_image.size > 0 %}
+              <a href="{{ item.url }}">{{ item.featured_image | product_img_url: 'medium' | img_tag }}</a>
+              {% endif %}
+            </div>
+          
+        </div>
+        <div class="large-8 columns">
+          <div class="search-result">
+            <h3>{{ item.title | highlight: search.terms | link_to: item.url }}</h3>
+            
+            {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="columns">
+          <div class="divider results"></div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+<!-- End results -->
+{% endif %}
+
+<div class="row">
+  <div class="right columns large-6">
+    {% include 'snippet-pagination' %}
+  </div>
+</div>
 
 {% endpaginate %}

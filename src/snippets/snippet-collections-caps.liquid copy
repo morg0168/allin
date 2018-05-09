@@ -1,0 +1,91 @@
+
+<div id="lens-box-desktop" class="lens-box">  
+
+  {% for link in linklists.all-collections.links %}
+
+  {% assign collection = link.object %}
+
+    {% assign collectionname  = collection.title %}
+    
+    <!-- caps -->
+    {% if collectionname == 'caps' %}
+
+    <div class="caps-container">
+      
+      <h2 class="text-centered text-caps">&nbsp;</h2>
+      
+      {% for product in collection.products %}
+
+        {% assign product_lens_options  = product.title | split: ' - ' %}
+
+        <div class="caps-thumb goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" style="background-image: url({{ product.featured_image.src | product_img_url: "original" }})">
+          
+          <span class="overlay-white">
+
+            <div class="centered-table">
+              
+              <div>
+
+                <p id="cad-currency" class="text-centered">{{product.title}}</p>
+                
+                <p class="text-centered">{{product.price | money}}</p>
+
+                <a href="{{product.url}}" class="black-btn">view</a>
+                
+              </div>
+
+            </div>
+
+          </span>
+
+        </div>
+      
+      {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    {% endif %}
+
+  {% endfor %}
+
+</div>
+
+<div id="lens-box-mobile"  class="lens-box" style="display:none;">
+  
+  {% for link in linklists.all-collections.links %}
+  {% assign collection = link.object %}
+
+    {% assign collectionname  = collection.title %}
+    
+    <!-- caps -->
+    {% if collectionname == 'caps' %}
+    <div class="caps-container">
+      
+      <h2 class="text-centered text-caps">&nbsp;</h2>
+      
+      {% for product in collection.products %}
+
+        {% assign product_lens_options  = product.title | split: ' - ' %}
+
+        <a style="display:none;" class="caps-thumb goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" href="{{product.url}}">
+          
+          <div class="goggles-block">
+            
+            <img src="{{ product.featured_image.src | product_img_url: "original" }}" alt="">
+
+            <span class="product-title-hover">{{ product.title }}</span>
+            
+          </div>
+
+        </a>
+      
+      {% endfor %}
+    </div>
+    {% else %}
+
+    {% endif %}
+
+  {% endfor %}
+</div>

@@ -1,0 +1,46 @@
+<div class="row blog-article-title">
+  <div class="columns large-12">
+    <h1 class="text text-centered">/events</h1>
+  </div>
+</div>
+
+<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3">
+  {% for article in blog.articles %}
+  	{% if article.content contains "<img" %}
+		{% assign image_src = article.content | split: 'src="' %}
+	    {% assign image_src = image_src[1] | split: '"' | first | replace: '//cdn', 'https://cdn'; | replace: 'http:http://';, 'https://'; | remove: 'https:' %}
+	{% endif %}
+
+  <div class="main-wrapper-small event-block">
+
+    <h2 class="text-centered">
+
+      <a class="underline-text" href="{{ article.url }}">{{ article.title }}</a>
+
+    </h2>
+
+  	<a class="image" href="{{ article.url }}" title="{{ article.title }}"><img class="event-picture" src="{{ image_src }}"></a>
+
+    {% assign eventlink = article.metafields.events %}
+    {% if eventlink['event-link'] %}
+      <a class="link-btn-article white-btn-link" target="_blank" href="{{ eventlink['event-link'] }}">event link</a>
+    {% endif %}
+
+    {% if eventlink['event-ticket'] %}
+    <a class="link-btn-article white-btn-link" target="_blank" href="{{ eventlink['event-ticket'] }}">buy tickets</a>
+    {% endif %}
+
+  </div>
+
+  {% endfor %}
+</ul>
+
+<div class="normal-frame text-centered" style="margin-top:3em;">
+
+  <a class="white-btn-link" href="http://www.allineyewear.com/" style="margin-bottom: 10px;">
+
+    <span>home</span>
+
+  </a>
+
+</div>

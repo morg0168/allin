@@ -1,0 +1,33 @@
+<div class="row blog-article-title">
+  <div class="columns large-12">
+    <h1 class="text text-centered">meet people</h1>
+  </div> 
+</div>
+
+<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3">
+  {% for article in blog.articles %}
+  	{% if article.content contains "<img" %}
+		{% assign image_src = article.content | split: 'src="' %}
+	    {% assign image_src = image_src[1] | split: '"' | first | replace: '//cdn', 'http://cdn'; | replace: 'http:http://';, 'http://'; | remove: 'https:' %}
+	{% endif %}
+
+  <div class="main-wrapper-small">
+  	<a class="image" href="{{ article.url }}" title="{{ article.title }}"><img src="{{ image_src }}"></a>
+  	<h2 class="text-centered">
+  		<a class="underline-text" href="{{ article.url }}">{{ article.title }}</a>
+  	</h2>
+  </div>
+  {% endfor %}
+</ul>
+
+    <div class="normal-frame text-centered">
+
+      <a class="white-btn-link" href="http://www.allineyewear.com/" style="margin-bottom: 10px;">
+        <span>home</span>
+      </a>
+
+      <a class="white-btn-link" href="http://www.allineyewear.com/blogs/blog">
+        <span>back to meet people</span>
+      </a>
+      
+    </div>

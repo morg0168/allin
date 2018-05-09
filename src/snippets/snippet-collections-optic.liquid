@@ -1,0 +1,119 @@
+<div class="main-wrapper">
+
+  <ul id="lens-options-page">
+
+    <li><a href="http://www.allineyewear.com/pages/sun-lenses">sun lens</a></li>
+
+    <li><a href="http://www.allineyewear.com/pages/polarized">polarized</a></li>
+
+    <li class="active"><a href="#">optic</a></li>
+
+  </ul>
+
+</div>
+
+<div id="lens-desktop" class="lens-box main-wrapper">
+  
+  {% for link in linklists.all-collections.links %}
+
+    {% assign collection = link.object %}
+
+    {% assign collectionname  = collection.title %}
+    
+    {% if collectionname != 'caps' and collectionname != 'outerwear'  %}
+
+    <div class="goggles" style="left:0px;">
+
+    <!-- goggles -->
+    <h2 class="text-centered text-goggle">{{ collection.title }}</h2>
+    
+    {% for product in collection.products %}
+
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+
+      {% if product_lens_options[2] == 'optic' %}
+
+      <div style="background-image: url({{ product.featured_image.src | product_img_url: "original" }})" class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}">
+
+            <span class="overlay-white">
+              
+              <div class="goggles-block centered-table">
+
+                <div>
+
+                  <p id="cad-currency" class="text-centered">{{product.title}}</p>
+                  
+                  <p class="text-centered">{{product.price | money}}</p>
+
+                  <a href="{{product.url}}" class="black-btn view-goggles">view</a>
+                  
+                </div>
+
+              </div>
+
+            </span>
+
+      </div>
+
+      {% endif %}
+
+    {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+  {% endfor %}
+
+</div>
+
+<div id="lens-box-mobile"  class="lens-box">
+  
+  {% for link in linklists.all-collections.links %}
+  {% assign collection = link.object %}
+
+    {% assign collectionname  = collection.title %}
+    
+    {% if collectionname != 'caps' and collectionname != 'outerwear' %}
+  
+    <!-- goggles -->
+    <h2 class="text-centered text-goggle">{{ collection.title }}</h2>
+
+    <span style="width:100%;display:inline-block;font-size:9px;" class="text-centered text-goggle">swipe for other colors</span>
+    <!-- sun lens -->
+    <div class="goggles swiper-container-sun-lens sun-lens" style="left:0px;">
+
+      <div class="swiper-wrapper sun-lens">
+
+      {% for product in collection.products %}
+
+      {% assign product_lens_options  = product.title | split: ' - ' %}
+      
+        {% if product_lens_options[2] == 'optic' %}
+
+        <div class="swiper-slide">
+
+          <a class="goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" href="{{product.url}}">
+            
+            <div class="goggles-block">
+              
+              <img src="{{ product.featured_image.src | product_img_url: "original" }}" alt="">
+
+              <span class="product-title-hover">{{ product.title }}</span>
+
+            </div>
+
+          </a>
+
+        </div>
+        {% else %}
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+
+    {% endif %}
+
+  {% endfor %}
+
+</div>

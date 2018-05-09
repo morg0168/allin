@@ -1,0 +1,30 @@
+{% assign product_slider = false %}
+{% if snippet-product-item == 'product-slider' %}
+  {% assign product_slider = true %}
+{% endif %}
+        
+    {% if current_product_title == product.title %}
+
+    <li class="active">
+
+    {% else %}
+
+    <li>
+
+    {% endif %}
+    {% assign title_parts  = product.title | split: ' - ' %}
+    {% assign product_type_split  = product.title | split: ' - ' %}
+    {% assign product_type  = product_type_split[0] %}
+
+    <!-- Related glasses -->
+      <a href="{{ product.url }}">
+       
+        {% if title_parts.size > 1 %}
+
+        {{ title_parts[2] }}
+
+        {% endif %}
+
+      </a>
+
+    </li>

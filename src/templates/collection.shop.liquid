@@ -1,0 +1,48 @@
+{% assign products_per_row = settings.collections-products-per-row | to_number %}
+{% assign products_per_page =  products_per_row | to_number | times: settings.collections-rows-per-page %}
+
+{% paginate collection.products by products_per_page %}
+<header class="row">
+  <div class="left columns large-3">
+    {% include 'snippet-breadcrumbs' %}
+  </div>
+  <div class="columns large-6">
+    <h1 class="page-title"><span class="text">Pick your model</span></h1>
+  </div>
+</header>
+
+<div class="row">
+  <div class="columns">
+    <div class="divider"></div>
+  </div>
+</div>
+
+<div class="row">
+
+  {% if shop.products_count == 0 %}
+
+    {% include 'snippet-default-products' %}
+
+  {% else %}
+    <section class="row">
+      {% if collection.products.size == 3 %}
+      <div class="product-grid grid-3 clearfix">
+      {% else %}
+      <div class="product-grid grid-2 clearfix">
+      {% endif %}
+        {% for product in collection.products %}
+          {% include 'snippet-product-item' %}
+        {% endfor %}
+      </div>
+    </section>
+
+  {% endif %}
+</div>
+
+<div class="row">
+  <div class="columns">
+    <div class="divider bottom-margin"></div>
+  </div>
+</div>
+
+{% endpaginate %}

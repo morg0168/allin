@@ -1,0 +1,51 @@
+
+<div class="lens-box" style="margin-top:-2em;">  
+
+  {% for link in linklists.all-collections.links %}
+
+  {% assign collection = link.object %}
+
+    {% assign collectionname  = collection.title %}
+    
+    {% if collectionname == 'outerwear' %}
+
+    <!-- outerwear -->
+    <div class="caps-container">
+      
+      {% for product in collection.products %}
+
+        {% assign product_lens_options  = product.title | split: ' - ' %}
+
+        <div class="outerwear-thumb goggle-thumb {{ product_lens_options[2] | replace: ' ', '-' }}" style="background-image: url({{ product.featured_image.src | product_img_url: "original" }})">
+          
+          <span class="overlay-white">
+
+            <div class="centered-table">
+              
+              <div>
+
+                <p class="text-centered">{{product.title}}</p>
+                
+                <p class="text-centered">{{product.price | money}}</p>
+
+                <a href="{{product.url}}" class="black-btn">view</a>
+                
+              </div>
+
+            </div>
+
+          </span>
+
+        </div>
+      
+      {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    {% endif %}
+
+  {% endfor %}
+
+</div>
