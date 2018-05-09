@@ -1,0 +1,451 @@
+// developer : emily morgan
+// contact : emily.a.morgan@gmail.com
+
+// mixins
+
+/*============================================================================
+  Dependency-free breakpoint mixin
+    - http://blog.grayghostvisuals.com/sass/sass-media-query-mixin/
+==============================================================================*/
+$min: min-width;
+$max: max-width;
+@mixin at-query ($constraint, $viewport1, $viewport2:null) {
+  @if $constraint == $min {
+    @media screen and ($min: $viewport1) {
+      @content;
+    }
+  } @else if $constraint == $max {
+    @media screen and ($max: $viewport1) {
+      @content;
+    }
+  } @else {
+    @media screen and ($min: $viewport1) and ($max: $viewport2) {
+      @content;
+    }
+  }
+}
+
+$viewportIncrement: 1px;
+$siteWidth: 1050px;
+$small: 590px;
+$Regular: 768px;
+$large: 769px;
+$xlarge: $siteWidth + $viewportIncrement;
+
+$postSmall: $small + $viewportIncrement;
+$preRegular: $Regular - $viewportIncrement;
+$preLarge: $large - $viewportIncrement;
+
+/*================ The following are dependencies of csswizardry grid ================*/
+$breakpoints: (
+  'small' '(max-width: #{$small})',
+  'Regular' '(min-width: #{$postSmall}) and (max-width: #{$Regular})',
+  'Regular-down' '(max-width: #{$Regular})',
+  'large' '(min-width: #{$large})'
+);
+$breakpoint-has-widths: ('small', 'Regular', 'Regular-down', 'large');
+$breakpoint-has-push:  ('Regular', 'Regular-down', 'large');
+$breakpoint-has-pull:  ('Regular', 'Regular-down', 'large');
+
+@mixin clearfix() {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin font-smoothing () {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin responsive-typo ( $min-size : 12, $max-size : 21, $min-width : 420, $max-width : 1280 ) {
+  font-size: calc( #{$min-size + px} + #{$max-size - $min-size} * ( (100vw - #{$min-width + px}) / #{$max-width - $min-width}));
+  @media screen and (max-width: $min-width + px ) {
+    font-size :  $min-size + px;
+  }
+  @media screen and (min-width: $max-width + px) {
+    font-size : $max-size + px;
+  }
+}
+
+@mixin prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+// animations
+@-webkit-keyframes animLeftSlidshow {
+    0% {
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%)
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%)
+    }
+}
+@-moz-keyframes animLeftSlidshow {
+    0% {
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%)
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%)
+    }
+}
+@-ms-keyframes animLeftSlidshow {
+    0% {
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%)
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%)
+    }
+}
+@-o-keyframes animLeftSlidshow {
+    0% {
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%)
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%)
+    }
+}
+@keyframes animLeftSlidshow {
+    0% {
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        -o-transform: translate(0, -50%);
+        transform: translate(0, -50%)
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%)
+    }
+}
+
+// base
+
+/**
+ * Typography
+ */
+@font-face {
+  font-family: 'Maison Neue Regular';
+  src: url('MaisonNeue-Regular.eot'); /* IE9 Compat Modes */
+  src: url('MaisonNeue-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('MaisonNeue-Regular.woff') format('woff'), /* Modern Browsers */
+       url('MaisonNeue-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('MaisonNeue-Regular.svg#751d4e146592611362c6dd26f9bc3016') format('svg'); /* Legacy iOS */
+
+  font-style:   normal;
+  font-weight:  400;
+}
+
+html {
+  padding-bottom:0;
+}
+
+* {
+  font-family: 'Maison Neue Regular', sans-serif;
+  color:black;
+  font-size:11px;
+}
+
+/**
+ * Custom Index
+ */
+.template-index {
+    min-height:100vh;
+    margin-left:0;
+    margin-right:0;
+    background-image: linear-gradient(to bottom right, rgba(0,0,0,0.87), #fff);
+    min-height: 100vh;
+    min-width: 100vw;
+    top: 0;
+    margin-bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 0;
+    height: 100%;
+    width: 100%;
+    line-height: 1.42857143;
+    font-size:11px;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    .logo_text {
+      @media only screen and (min-width:48em){
+              margin-left: 8.333%;
+      }
+      font-size: 5rem;
+      // margin-bottom: 6rem;
+      // margin-top: 0;
+      color: transparent;
+      background: linear-gradient(to right, #fff 40%, #000 10%);
+      background: -webkit-linear-gradient(to right, #fff 40%, #000 10%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    }
+    main {
+      margin-left: 0;
+      margin-right: 0;
+      min-height:100vh;
+      @media only screen and (min-width:85em){
+        padding-top:10vh;
+      }
+      .shopify-section-temporary-home {
+        min-height:100vh;
+      }
+    }
+    #temporary-home {
+      padding:2vh;
+      @media only screen and (min-width:48em){
+          // padding: 5vh;
+      }
+      margin: 0 auto;
+      max-width: 1280px;
+      > .row:first-of-type {
+            // padding-bottom: 6rem;
+            // padding-bottom: 20vh;
+      }
+      p {
+        margin:0;
+      }
+      .bar {
+        width: 5px;
+        margin: 0 auto;
+        height: 100%;
+        min-height: 50vh;
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.87), #fff);
+        span {
+          color: limegreen;
+          font-size: 22px;
+          padding:0;
+          margin:0;
+          font-weight:100;
+        }
+      }
+      .stockists {
+        .row {
+          p,a  {
+            font-size:10px;
+          }
+        }
+      }
+      .footer-info {
+        @media only screen and (min-width:48em) {
+          position: absolute;
+          width: 100%;
+          left: 0;
+          margin: 0 auto;
+        }
+        bottom:10px;
+        margin-top:5vh;
+        .social {
+          padding-right:50px;
+          span {
+            @media only screen and (min-width:48em) {
+              padding:0 5px;
+            }
+          }
+        }
+        .email {
+          @media only screen and (min-width:48em) {
+            padding-left:50px;
+          }
+        }
+      }
+    }
+}
+
+/**
+ * Common
+ */
+
+a {
+  text-decoration: none;
+    color:black;
+}
+
+input:focus, textarea:focus, button:focus {
+    outline:none;
+}
+
+nav {
+  height:100%;
+  .site-nav {
+    &.top {
+      li:nth-child(3) {
+        margin-bottom:50px;
+      }
+    }
+    &.bottom {
+      position:absolute;
+      bottom: 50px;
+      li:nth-child(5) {
+        margin-bottom:50px;
+      }
+    }
+  }
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+}
+
+.-hide-mobile {
+  @media only screen and (max-width:48em){
+      display:none;
+  }
+}
+
+// #main-header {
+//   position: fixed;
+//   background: white;
+//   height: 100vh;
+//   width: 200px;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   border-right:1px solid black;
+//   ul {
+//     padding:0 0 0 20px;
+//   }
+// }
+
+.o-container {
+  padding: 15vh 50px 15vh 50px;
+  max-width:720px;
+  width:100%;
+}
+
+.add-to-cart {
+  background-color:yellow;
+  border:none;
+  display:block;
+}
+
+/**
+ * Page Template
+ */
+//  #MainContent {
+//    min-height: 100vh;
+//    margin-left: 1rem;
+//    margin-right: 1rem;
+// }
+
+/**
+ * FAQ Template
+ */
+ #faq, #terms-and-conditions, #privacy {
+   p {
+      color:red;
+      text-align:left;
+   }
+ }
+
+ #stockistes {
+   p {
+      color:red;
+      text-align:right;
+      margin:0;
+   }
+ }
+
+ /**
+  * Product Template
+  */
+
+ .template-product {
+   #shopify-section-product {
+     width:100%;
+   }
+ }
+
+ /**
+  * Contact Template
+  */
+  #contact_form {
+    input, textarea, select {
+      border: 1px solid red;
+      border-radius: 0;
+      max-width: 100%;
+      color: red;
+      margin: 8px 0;
+      width: 80%;
+      padding: 3px 5px;
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: red;
+      }
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: red;
+      }
+      &:-ms-input-placeholder { /* IE 10+ */
+        color: red;
+      }
+      &:-moz-placeholder { /* Firefox 18- */
+        color: red;
+      }
+    }
+    input[type='submit']
+    {
+        border:none;
+        text-align: left;
+        &:after {
+          content: "<div>TEST<div>";
+      }
+    }
+  }
+
+
+   /**
+    * Media Queries
+    */
+
+  @media only screen and (min-width:48em){
+
+  }
+  @media only screen and (min-width:62em){
+
+  }
+  @media only screen and (min-width:75em) {
+
+  }

@@ -70,11 +70,16 @@
 
   {{ content_for_header }}
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  {{ 'jquery.bxslider.css' | asset_url | stylesheet_tag  }}
-  {{ 'swiper.min.css' | asset_url | stylesheet_tag  }}
-  {{ 'close.css' | asset_url | stylesheet_tag  }}
+  {% if template == 'index' %}
+    {{ 'flexboxgrid.min.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'app.scss.css' | asset_url | stylesheet_tag }}
+  {% else %}
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {{ 'jquery.bxslider.css' | asset_url | stylesheet_tag  }}
+    {{ 'swiper.min.css' | asset_url | stylesheet_tag  }}
+    {{ 'close.css' | asset_url | stylesheet_tag  }}
+  {% endif %}
 
   <!--[if lt IE 8]>
     {{ 'json2.js' | asset_url | script_tag }}
