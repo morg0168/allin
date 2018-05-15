@@ -187,10 +187,14 @@ html {
   font-size:11px;
 }
 
+body {
+  margin-top:0;
+}
+
 /**
  * Custom Index
  */
-.template-index {
+.template-index, .template-page {
     min-height:100vh;
     margin-left:0;
     margin-right:0;
@@ -301,6 +305,34 @@ html {
         }
       }
     }
+}
+
+.capsule-inner {
+  .footer-info {
+    margin-top:2rem!important;
+    padding-left:1em;
+    @media only screen and (min-width:48em) {
+      padding-left:0;
+      width: 100%;
+      left: 0;
+      margin: 0 auto;
+    }
+    bottom:10px;
+    margin-top:5vh;
+    .social {
+      padding-right:50px;
+      span {
+        @media only screen and (min-width:48em) {
+          padding:0 5px;
+        }
+      }
+    }
+    .email {
+      @media only screen and (min-width:48em) {
+        padding-left:50px;
+      }
+    }
+  }
 }
 
 /**
