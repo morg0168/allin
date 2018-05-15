@@ -185,15 +185,15 @@ li a:focus, li a:hover {
 /* -- Slider --*/
 
 .glyphicon-chevron-left:before {
-  background: url({{ 'arrow-left.svg' | asset_url }}) no-repeat center 0px;
-  background-size: 30px;
+  background: url({{ 'arrow-left.svg' | asset_url }}) no-repeat center center;
   color: transparent;
+  background-size: 9px;
 }
 
 .glyphicon-chevron-right:before {
-  background: url({{ 'arrow-right.svg' | asset_url }}) no-repeat center 0px;
-  background-size: 30px;
+  background: url({{ 'arrow-right.svg' | asset_url }}) no-repeat center center;
   color: transparent;
+  background-size: 9px;
 }
 
 .carousel {
@@ -280,9 +280,13 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
 .carousel-indicators {
   display: none;
 }
+.page-capsule .back > a {
+  left:10em;
+}
 
 .page-capsule .back img {
-  width: 25px;
+  width: 9px;
+  margin-right: 9px;
   position: relative;
   top: -50px;
 }
