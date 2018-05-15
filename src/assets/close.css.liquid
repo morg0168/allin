@@ -17,7 +17,6 @@
 /* General */
 
 body {
-  background: white;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
 }
@@ -25,7 +24,7 @@ body {
 #closing-template {
   font-family: 'MaisonNeue-Medium' !important;
   font-size: 11px;
-  background: white;
+
 }
 
 #footer {
@@ -148,7 +147,7 @@ li a:focus, li a:hover {
 }
 /* footer */
 .full {
-  background: white;
+
   margin-top: 50px;
 }
 
@@ -218,10 +217,6 @@ li a:focus, li a:hover {
   left: -30px;
 }
 
-.page-capsule #logo {
-  width: 80px;
-  margin-top: 80px;
-}
 
 .page-capsule .container {
   margin: 0 auto;
@@ -239,7 +234,6 @@ li a:focus, li a:hover {
 .page-capsule h3 {
   font-family: 'MaisonNeue-Medium' !important;
   font-size: 11px;
-  color: #ED3230;
   margin-bottom: 60px
 }
 
@@ -247,7 +241,7 @@ li a:focus, li a:hover {
   font-family: 'MaisonNeue-Medium' !important;
   margin-bottom: 20px;
   font-size: 11px;
-  color: #ED3230;
+
 }
 
 .page-capsule .right-text {
@@ -260,7 +254,6 @@ li a:focus, li a:hover {
     display: flex;
     font-family: 'MaisonNeue-Medium' !important;
     font-size: 11px;
-    color: #ED3230;
     position: fixed;
     bottom: 27%;
 }
@@ -298,7 +291,6 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
   position: relative;
   left: 69px;
   top: -25px;
-  color: #ED3230;
   font-family: 'MaisonNeue-Medium' !important;
   font-size: 11px;
 }
@@ -309,7 +301,6 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
     position: fixed;
     font-family: 'MaisonNeue-Medium' !important;
     font-size: 11px;
-    color: #ED3230;
     top: 20px;
     right: 20px;
     text-decoration: none;
@@ -320,7 +311,6 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
     display: flex;
     font-family: 'MaisonNeue-Medium' !important;
     font-size: 11px;
-    color: #ED3230;
     text-decoration: none;
 }
 
@@ -366,7 +356,6 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
   display: flex;
   font-family: 'MaisonNeue-Medium' !important;
   font-size: 11px;
-  color: #ED3230;
   width: 100%;
   position: relative;
 }
@@ -430,14 +419,6 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
   margin-bottom: 60px;
 }
 
-.page-capsule #footer-holder {
-  color: #f60300;
-  font-size: 11px;
-  position: relative;
-  left: 40px;
-  bottom: -80px;
-}
-
 
 
 
@@ -451,24 +432,12 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
 	#closing-template {
     font-family: 'MaisonNeue-Medium' !important;
     font-size: 11px;
-    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
 	}
 
   }
-
-@media only screen and (min-width : 1500px) {
-
-	.page-capsule #footer-holder {
-    color: #f60300;
-    font-size: 11px;
-    position: relative;
-    left: 40px;
-    bottom: -80px;
-	}
-}
 
   @media only screen and (max-width : 1199px) {
     .page-capsule .slide-number {
@@ -509,12 +478,7 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
      .logo-holder img {
         bottom: 0px;
 	}
-  .page-capsule #logo {
-      width: 80px;
-      margin-top: 80px;
-      margin-bottom: 80px;
-      margin-left: 70px;
-  }
+
 .page-capsule .slide-number {
     left: 70px;
 }
@@ -717,9 +681,7 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
   .carousel-control.right {
     right: -20px;
   }
-  .page-capsule #logo {
-    margin-left: 35px;
-  }
+
   .page-capsule .float-left {
     margin-left: 35px;
   }
@@ -733,4 +695,40 @@ _::-webkit-full-page-media, _:future, :root #closing-template .skip img {
     margin: 0 auto;
     margin-bottom: 60px;
 }
+}
+
+.page-capsule .logo_text img{
+  max-width:130px;
+  padding-bottom:2rem;
+}
+@media only screen and (min-width:48em){
+        .page-capsule .logo_text img {
+          max-width:130px;
+          padding-bottom:2rem;
+                  margin-left: 8.333%;
+        }
+      }
+
+.page-capsule {
+  margin-left:0;
+  margin-right:0;
+  background-image: linear-gradient(to bottom right, rgba(0,0,0,0.87), #fff);
+  min-height: 100vh;
+  min-width: 100vw;
+  top: 0;
+  margin-bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 0;
+  height: 100%;
+  width: 100%;
+  line-height: 1.42857143;
+  font-size:11px;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  padding: 2vh;
+margin: 0 auto;
+max-width: 1280px;
+padding-top:3vh;
 }
