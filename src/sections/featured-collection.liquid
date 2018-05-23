@@ -8,7 +8,7 @@
   <div class="row middle-xs">
 
   {% for product in collection.products limit: 6 %}
-  <div class="col-xs-12 col-sm-6 start-xs">
+  <div class="col-xs-12 col-sm-6 center-xs">
     <a href="{{ product.url | within: collection }}">
 
       {% if product.featured_image != blank %}
@@ -38,7 +38,48 @@
       {% endif %}
     </p>
 
-        </div>
+    <p>
+      {% assign search_option = "Size" %}
+      {% assign delimiter = "|" %}
+      {% assign option_index = "" %}
+      {% assign option_value = "" %}
+      {% assign option_array = "" %}
+
+      {% for option_title in product.options %}
+        {% if option_title == search_option %}
+          {% assign option_index = forloop.index0 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% for variant in product.variants %}
+        {% if variant.available %}
+          {% case option_index %}
+          {% when 0 %}
+            {% assign option_value = variant.option1 | append: delimiter %}
+          {% when 1 %}
+            {% assign option_value = variant.option2 | append: delimiter %}
+          {% when 2 %}
+            {% assign option_value = variant.option3 | append: delimiter %}
+          {% endcase %}
+          {% unless option_array contains option_value %}
+            {% assign option_array = option_array | append: option_value %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+      
+      {% assign option_array = option_array | split: delimiter %}
+
+      {% if option_array.size > 0 %}
+        <p>Available {{ search_option }}</p>
+        <ul>
+          {% for value in option_array %}
+          <li>{{ value }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        </p>
+      </div>
     {% endfor %}
   </div>
 </div>
