@@ -7,7 +7,41 @@
 <div class="{{ 'section.settings.title' | handleize }}">
   <div class="row middle-xs">
 
-  {% for product in collection.products limit: 6 %}
+    <div class="col-xs-12 col-sm-12 center-xs">
+      <label for="sort-by">Sort by</label>
+      <select id="sort-by">
+        <option value="manual">Featured</option>
+        <option value="price-ascending">Price: Low to High</option>
+        <option value="price-descending">Price: High to Low</option>
+        <option value="title-ascending">A-Z</option>
+        <option value="title-descending">Z-A</option>
+        <option value="created-ascending">Oldest to Newest</option>
+        <option value="created-descending">Newest to Oldest</option>
+        <option value="best-selling">Best Selling</option>
+      </select>
+    </div>
+    <script>
+    Shopify.queryParams = {};
+    if (location.search.length) {
+      for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+        aKeyValue = aCouples[i].split('=');
+        if (aKeyValue.length > 1) {
+          Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+        }
+      }
+    }
+    jQuery(function() {
+      jQuery('#sort-by')
+        .val('{{ collection.sort_by | default: collection.default_sort_by | escape }}')
+        .bind('change', function() {
+          Shopify.queryParams.sort_by = jQuery(this).val();
+          location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+        });
+      });
+
+    </script>
+
+  {% for product in collection.products %}
   <div class="col-xs-12 col-sm-6 center-xs">
     <a href="{{ product.url | within: collection }}">
 
@@ -67,7 +101,7 @@
           {% endunless %}
         {% endif %}
       {% endfor %}
-      
+
       {% assign option_array = option_array | split: delimiter %}
 
       {% if option_array.size > 0 %}
