@@ -33,8 +33,7 @@
         }
       },
       "content_for_index": [
-        "featured-collection",
-        "featured-product"
+        "featured-collection"
       ]
     }
   }

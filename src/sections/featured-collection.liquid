@@ -2,7 +2,8 @@
   <h2>{{ section.settings.title | escape }}</h2>
 {% endif %}
 
-{%- assign collection = collections[section.settings.collection] -%}
+{%- assign collection = collections[section.settings.collection]  -%}
+{% include 'dump' with collection %}
 
 <div class="{{ 'section.settings.title' | handleize }}">
   <div class="row middle-xs">
@@ -13,108 +14,114 @@
         <option value="manual">Featured</option>
         <option value="price-ascending">Price: Low to High</option>
         <option value="price-descending">Price: High to Low</option>
-        <option value="title-ascending">A-Z</option>
-        <option value="title-descending">Z-A</option>
         <option value="created-ascending">Oldest to Newest</option>
         <option value="created-descending">Newest to Oldest</option>
-        <option value="best-selling">Best Selling</option>
       </select>
     </div>
-    <script>
-    Shopify.queryParams = {};
-    if (location.search.length) {
-      for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
-        aKeyValue = aCouples[i].split('=');
-        if (aKeyValue.length > 1) {
-          Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+  <script>
+    "use strict";
+    var newUrl;
+    document.querySelector('#sort-by').addEventListener('change', function() {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      urlSearchParams.set(this.name, this.value);
+      newUrl = `/collections/frontpage?sort_by${urlSearchParams}`;
+      loadDoc(newUrl);
+    });
+    function loadDoc(newUrl) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var resp = this.responseText;
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(resp, "text/html");
+          var targetPart = xmlDoc.getElementById("collection-home-page");
+          document.getElementById("toggle-product-container").innerHTML = targetPart.innerHTML;
+        } else {
         }
-      }
+      };
+      xhttp.open("GET", newUrl, true);
+      xhttp.send();
     }
-    jQuery(function() {
-      jQuery('#sort-by')
-        .val('{{ collection.sort_by | default: collection.default_sort_by | escape }}')
-        .bind('change', function() {
-          Shopify.queryParams.sort_by = jQuery(this).val();
-          location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
-        });
-      });
+  </script>
 
-    </script>
+  <div class="row" id="toggle-product-container">
 
   {% for product in collection.products %}
-  <div class="col-xs-12 col-sm-6 center-xs">
-    <a href="{{ product.url | within: collection }}">
+    <div class="col-xs-12 col-sm-6 center-xs">
+      <a href="{{ product.url | within: collection }}">
 
-      {% if product.featured_image != blank %}
-        {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
-      {% endif %}
+        {% if product.featured_image != blank %}
+          {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
+        {% endif %}
 
-      <p>{{ product.title }}</p>
-    </a>
+        <p>{{ product.title }}</p>
+      </a>
 
-    <p>
-      {% if product.compare_at_price > product.price %}
+      <p>
+        {% if product.compare_at_price > product.price %}
 
-        {% if product.price_varies %}
-          {%- assign sale_price = product.price | money -%}
-          {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+          {% if product.price_varies %}
+            {%- assign sale_price = product.price | money -%}
+            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+          {% else %}
+            {{ 'products.product.on_sale' | t }}
+            {{ product.price | money }}
+          {% endif %}
         {% else %}
-          {{ 'products.product.on_sale' | t }}
-          {{ product.price | money }}
+          {% if product.price_varies %}
+            {%- assign price = product.price | money -%}
+            {{ 'products.product.from_text_html' | t: price: price }}
+          {% else %}
+            {{ product.price | money }}
+          {% endif %}
         {% endif %}
-      {% else %}
-        {% if product.price_varies %}
-          {%- assign price = product.price | money -%}
-          {{ 'products.product.from_text_html' | t: price: price }}
-        {% else %}
-          {{ product.price | money }}
-        {% endif %}
-      {% endif %}
-    </p>
+      </p>
 
-    <p>
-      {% assign search_option = "Size" %}
-      {% assign delimiter = "|" %}
-      {% assign option_index = "" %}
-      {% assign option_value = "" %}
-      {% assign option_array = "" %}
+      <p>
+        {% assign search_option = "Size" %}
+        {% assign delimiter = "|" %}
+        {% assign option_index = "" %}
+        {% assign option_value = "" %}
+        {% assign option_array = "" %}
 
-      {% for option_title in product.options %}
-        {% if option_title == search_option %}
-          {% assign option_index = forloop.index0 %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
+        {% for option_title in product.options %}
+          {% if option_title == search_option %}
+            {% assign option_index = forloop.index0 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
 
-      {% for variant in product.variants %}
-        {% if variant.available %}
-          {% case option_index %}
-          {% when 0 %}
-            {% assign option_value = variant.option1 | append: delimiter %}
-          {% when 1 %}
-            {% assign option_value = variant.option2 | append: delimiter %}
-          {% when 2 %}
-            {% assign option_value = variant.option3 | append: delimiter %}
-          {% endcase %}
-          {% unless option_array contains option_value %}
-            {% assign option_array = option_array | append: option_value %}
-          {% endunless %}
-        {% endif %}
-      {% endfor %}
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            {% case option_index %}
+            {% when 0 %}
+              {% assign option_value = variant.option1 | append: delimiter %}
+            {% when 1 %}
+              {% assign option_value = variant.option2 | append: delimiter %}
+            {% when 2 %}
+              {% assign option_value = variant.option3 | append: delimiter %}
+            {% endcase %}
+            {% unless option_array contains option_value %}
+              {% assign option_array = option_array | append: option_value %}
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
 
-      {% assign option_array = option_array | split: delimiter %}
+        {% assign option_array = option_array | split: delimiter %}
 
-      {% if option_array.size > 0 %}
-        <p>Available {{ search_option }}</p>
-        <ul>
-          {% for value in option_array %}
-          <li>{{ value }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
+        {% if option_array.size > 0 %}
+          <p>Available {{ search_option }}
+          <span>
+            {% for value in option_array %}
+            <span>{{ value }}</span>
+            {% endfor %}
+          </span>
         </p>
-      </div>
+          {% endif %}
+          </p>
+        </div>
     {% endfor %}
+    </div>
   </div>
 </div>
 
