@@ -1,7 +1,3 @@
-{% if section.settings.title != blank %}
-  <h2>{{ section.settings.title | escape }}</h2>
-{% endif %}
-
 {%- assign collection = collections[section.settings.collection]  -%}
 {% include 'dump' with collection %}
 
@@ -9,23 +5,23 @@
   <div class="row middle-xs">
 
     <div class="col-xs-12 col-sm-12 center-xs">
-      <label for="sort-by">Sort by</label>
-      <select id="sort-by">
-        <option value="manual">Featured</option>
-        <option value="price-ascending">Price: Low to High</option>
-        <option value="price-descending">Price: High to Low</option>
-        <option value="created-ascending">Oldest to Newest</option>
-        <option value="created-descending">Newest to Oldest</option>
-      </select>
+      <div id="sort-by" class="row middle-xs center-xs">
+        <div data-value="created-descending" class="active col-xs-4">New Arrival</div>
+        <div data-value="price-ascending" class="col-xs-4">Low to high ($)</div>
+        <div data-value="price-descending" class="col-xs-4">High to low ($)</div>
+      </div>
     </div>
   <script>
     "use strict";
     var newUrl;
-    document.querySelector('#sort-by').addEventListener('change', function() {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      urlSearchParams.set(this.name, this.value);
-      newUrl = `/collections/frontpage?sort_by${urlSearchParams}`;
-      loadDoc(newUrl);
+    $('#sort-by div').click(function () {
+        let sortParam = $(this).attr('data-value');
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        urlSearchParams.set('', sortParam);
+        newUrl = `/collections/frontpage?sort_by${urlSearchParams}`;
+        loadDoc(newUrl);
+        $(this).parent().find('*').removeClass('active');
+        $(this).addClass('active');
     });
     function loadDoc(newUrl) {
       var xhttp = new XMLHttpRequest();
