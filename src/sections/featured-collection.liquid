@@ -22,10 +22,9 @@
         {% if product.featured_image != blank %}
           {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
         {% endif %}
-
-        <p>{{ product.title }}</p>
       </a>
-
+      {% if product.available %}
+      <div class="product-information available">
       <p>
         {% if product.compare_at_price > product.price %}
 
@@ -45,7 +44,7 @@
           {% endif %}
         {% endif %}
       </p>
-
+      <p>{{ product.title }}</p>
       <p>
         {% assign search_option = "Size" %}
         {% assign delimiter = "|" %}
@@ -88,9 +87,19 @@
         </p>
           {% endif %}
           </p>
+          <a href="{{ product.url | within: collection }}" class="go-to-product">
+            <span>
+              >
+            </span>
+          </a>
         </div>
+      {% else %}
+      <a href="{{ product.url | within: collection }}">
+        <div class="product-information unavailable"><p>Hors inventaire<span>></span></p></div>
+      </a>
+      {% endif %}
+      </div>
     {% endfor %}
-    </div>
   </div>
 </div>
 

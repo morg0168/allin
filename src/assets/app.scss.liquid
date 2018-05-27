@@ -267,6 +267,29 @@ ul {
   img {
     max-width:65%;
   }
+  .product-information {
+    margin: 2rem auto 100px auto;
+    max-width: 200px;
+    &.available {
+      text-align: left;
+    }
+    &.unavailable {
+      text-align:left;
+      background-color: red;
+      padding: 0.5rem 5px 0.5rem 1rem;
+    }
+    p {
+      margin:0;
+    }
+    .go-to-product {
+      background-color: yellow;
+      text-align: right;
+      margin: 0 auto;
+      width: 50px;
+      padding: 0.5rem 5px 0.5rem 1rem;
+      display: block;
+    }
+  }
 }
 
 /**
