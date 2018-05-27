@@ -25,7 +25,7 @@
   </header>
 
   <div class="{{ 'section.settings.title' | handleize }}">
-    <div class="row middle-xs" id="{{ template }}-{{ collection.title | handleize }}">
+    <div class="row middle-xs product-itemlist-container" id="{{ template }}-{{ collection.title | handleize }}">
       {% for product in collection.products %}
         <div class="col-xs-12 col-sm-6 center-xs">
           {% if product.featured_image != blank %}
