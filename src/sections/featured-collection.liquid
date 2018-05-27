@@ -11,34 +11,7 @@
         <div data-value="price-descending" class="col-xs-4">High to low ($)</div>
       </div>
     </div>
-  <script>
-    "use strict";
-    var newUrl;
-    $('#sort-by div').click(function () {
-        let sortParam = $(this).attr('data-value');
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set('', sortParam);
-        newUrl = `/collections/frontpage?sort_by${urlSearchParams}`;
-        loadDoc(newUrl);
-        $(this).parent().find('*').removeClass('active');
-        $(this).addClass('active');
-    });
-    function loadDoc(newUrl) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var resp = this.responseText;
-          var parser = new DOMParser();
-          var xmlDoc = parser.parseFromString(resp, "text/html");
-          var targetPart = xmlDoc.getElementById("collection-home-page");
-          document.getElementById("toggle-product-container").innerHTML = targetPart.innerHTML;
-        } else {
-        }
-      };
-      xhttp.open("GET", newUrl, true);
-      xhttp.send();
-    }
-  </script>
+
 
   <div class="row product-itemlist-container" id="toggle-product-container">
 
