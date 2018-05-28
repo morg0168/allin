@@ -10,8 +10,8 @@
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
 
-<div class="row middle-xs center-xs">
-  <div class="col-xs-12 col-sm-6">
+<div class="row middle-xs center-xs product-item-container">
+  <div class="col-xs-12 col-sm-9">
     {% if featured_image != blank %}
       <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
     {% endif %}
@@ -29,9 +29,11 @@
     {% endif %}
   </div>
 
-  <div class="col-xs-12 col-sm-6 start-xs">
-    <p>{{ product.title }}</p>
-    <p>{{ product.vendor }}</p>
+  <div class="col-xs-12 col-sm-3 start-xs">
+    <div class="product-information">
+      <p>{{ product.title }}</p>
+      <p>{{ product.vendor }}</p>
+    </div>
     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       <meta itemprop="priceCurrency" content="{{ shop.currency }}">
       <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
