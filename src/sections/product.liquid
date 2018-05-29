@@ -29,7 +29,7 @@
     {% endif %}
   </div>
 
-  <div class="col-xs-12 col-sm-3 start-xs">
+  <div class="col-xs-12 col-sm-3 start-xs product-information-container">
     <div class="product-information">
       <p>{{ product.title }}</p>
       <p>{{ product.vendor }}</p>
@@ -62,14 +62,14 @@
       {% unless product.has_only_default_variant %}
         {% for option in product.options_with_values %}
           <div class="selector-wrapper js">
-            <div class="row">
+            <div class="row middle-xs">
               <div class="col-xs-10 start-xs">
               <label class="SingleOptionSelector-0" for="SingleOptionSelector-{{ forloop.index0 }}">
                 {{ option.name }}
               </label>
             </div>
             <div class="col-xs-2 end-xs">
-              <span>></span>
+              <span class="rotate">></span>
             </div>
           </div>
 
@@ -144,8 +144,8 @@
         name="add"
         data-add-to-cart
         {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-        <div class="row">
-          <div class="col-xs-10 start-xs">
+        <div class="row middle-xs cart-text-contain {% unless current_variant.available %}{{ 'out' }}{% endunless %}">
+          <div class="col-xs-10 start-xs col">
           <span data-add-to-cart-text>
             {% if current_variant.available %}
               {{ 'products.product.add_to_cart' | t }}
@@ -161,10 +161,36 @@
       </button>
 
 
-      <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-      <input type="number" id="Quantity" name="quantity" value="1" min="1">
+      <div class="row middle-xs">
+          <div class="col-xs-10 start-xs">
+          <label for="Quantity">
+            {{ 'products.product.quantity' | t }}
+          </label>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1">
+        </div>
+        <div class="col-xs-2 end-xs">
+          <span class="rotate">></span>
+        </div>
+      </div>
+
+    </div>
 
     </form>
+
+
+    <a href="/">
+      <div class="row middle-xs retoure-a-la-boutique">
+          <div class="col-xs-2 start-xs no-padding">
+          <p>
+              <span class="rotate -reflect">></span>
+          </p>
+
+        </div>
+        <div class="col-xs-10 end-xs no-padding">
+          <span>Retoure a la Boutique</span>
+        </div>
+      </div>
+    </a>
 
   </div>
 

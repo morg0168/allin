@@ -160,6 +160,42 @@ $breakpoint-has-pull:  ('Regular', 'Regular-down', 'large');
     }
 }
 
+.rotate {
+display:inline-block;
+/* Safari */
+-webkit-transform: rotate(90deg);
+
+/* Firefox */
+-moz-transform: rotate(90deg);
+
+/* IE */
+-ms-transform: rotate(90deg);
+
+/* Opera */
+-o-transform: rotate(90deg);
+
+transform: rotate(90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  &.-reflect {
+    /* Safari */
+    -webkit-transform: rotate(-180deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-180deg);
+
+    /* IE */
+    -ms-transform: rotate(-180deg);
+
+    /* Opera */
+    -o-transform: rotate(-180deg);
+
+    transform: rotate(-180deg);
+  }
+}
+
+
 // base
 
 /**
@@ -254,9 +290,20 @@ ul {
 }
 
 .add-to-cart {
-  background-color:yellow;
   border:none;
   display:block;
+  background: transparent;
+}
+
+.cart-text-contain {
+    background-color:yellow;
+    padding: 0.5rem 5px 0.5rem 5px;
+    &.out {
+      background-color:red;
+    }
+    .col:first-of-type {
+      padding-left:5px;
+    }
 }
 
 /**
@@ -294,7 +341,7 @@ ul {
        text-align: right;
        margin: 0 auto;
        width: 50px;
-       padding: 0.5rem 5px 0.5rem 1rem;
+       padding: 0.5rem 5px 0.5rem 5px;
        display: inline-block;
      }
    }
@@ -351,11 +398,24 @@ ul {
    #shopify-section-product {
      width:100%;
    }
- }
-
+   form {
+     .rte {
+       min-height: 100px;
+       border: 1px solid black;
+       overflow: scroll;
+       padding: 20px;
+       margin: 25px auto;
+       p {
+         margin:0;
+       }
+     }
+   }
  .product-item-container {
     img {
       max-width:300px;
+    }
+    .product-information-container{
+      // max-width:225px;
     }
     .product-information {
       margin-bottom:1rem;
@@ -364,16 +424,19 @@ ul {
         padding:0;
       }
     }
-    .size-selects {
-      .col {
-        max-width:30px;
-      }
+    .size-selects, .retoure-a-la-boutique {
+      max-width: 180px;
+      // .col {
+      //   max-width:30px;
+      // }
     }
     input[type="radio"] {
      opacity:0;
      z-index:1;
      cursor:pointer;
+     font-size:50px;
       -webkit-transform: scale(4,1);
+      margin:1rem 0;
     }
     .radio-label::after {
       opacity: 1;
@@ -388,6 +451,7 @@ ul {
       width: 16px;
       border-radius: 50%;
       cursor:pointer;
+      margin:1rem 0;
     }
     .radio-label.active::after {
       background: yellow;
@@ -398,12 +462,17 @@ ul {
     }
     label.SingleOptionSelector-0 {
       display:block;
+      margin: 1rem auto;
     }
     .add-to-cart {
       width:100%;
       margin:1rem auto;
     }
   }
+  .retoure-a-la-boutique {
+    margin:50px 0;
+  }
+}
 
  /**
   * Contact Template

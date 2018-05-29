@@ -113,7 +113,7 @@
             {% else %}
             <a href="{{ product.url | within: collection }}">
               <div class="product-information unavailable row middle-xs between-xs">
-                <p class="col-xs-10 no-padding">Hors inventaire</p>
+                <p class="col-xs-10 no-padding">{{ 'products.product.sold_out' | t }}</p>
                 <p class="col-xs-2 no-padding end-xs">></p>
               </div>
             </a>
