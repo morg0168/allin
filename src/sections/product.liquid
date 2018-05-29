@@ -192,6 +192,15 @@
       </div>
     </a>
 
+    {% if product.options contains 'Size' %}
+      <a class="btn size-chart-open-popup" href="#size-chart">See size chart</a>
+    {% endif %}
+
+    {% comment %} TODO: Conditional to render size chart based on product type{% endcomment %}
+    <div id="size-chart" class="mfp-hide">
+    {{ pages.size-chart-1.content }}
+    </div>
+
   </div>
 
   {% if section.settings.show_share_buttons %}
