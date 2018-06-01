@@ -202,7 +202,7 @@
          "type": "text",
          "id": "supported_currencies",
          "label": "Supported currencies",
-         "default": "INR GBP CAD USD AUD EUR JPY",
+         "default": "CAD USD EUR",
          "info": "Use the country's ISO [currency code](http://www.xe.com/iso4217.php). Separate your currency codes with a space."
        },
        {

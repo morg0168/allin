@@ -12,16 +12,11 @@
     {% else %}
       <div class="h1" itemscope itemtype="http://schema.org/Organization">
     {% endif %}
-        <a href="/" itemprop="url" class="site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
-          {% if section.settings.logo != blank %}
-            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-            <img src="{{ section.settings.logo | img_url: image_size }}"
-                 srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-                 alt="{{ section.settings.logo.alt | default: shop.name }}"
+        <a href="/" itemprop="url" class="site-logo site-header__logo-image">
+
+            <img src="{{ 'logo.png' | asset_url }}"
+                 alt="{{ shop.name }}"
                  itemprop="logo">
-          {% else %}
-            {{ shop.name }}
-          {% endif %}
         </a>
     {% if template.name == 'index' %}
       </h1>
@@ -84,6 +79,7 @@
         {{ 'layout.cart.title' | t }}
         ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
       </a>
+      {% include 'currency-picker' %}
     </ul>
 
     {%- assign footer_linklist = section.settings.footer_linklist -%}
