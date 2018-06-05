@@ -216,7 +216,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 * {
   font-family: 'Maison Neue Regular', sans-serif;
   color:black;
-  font-size:12px;
+  font-size:11px;
   line-height:1.4;
 }
 
@@ -247,7 +247,6 @@ input:focus, textarea:focus, button:focus {
 }
 
 nav {
-  font-size:11px;
   height:100%;
   .site-nav {
     &.top {
@@ -480,7 +479,10 @@ ul {
       }
     }
     .size-selects, .retoure-a-la-boutique {
-      max-width: 180px;
+      max-width: 170px;
+      label {
+        font-size:12px;
+      }
       // .col {
       //   max-width:30px;
       // }
@@ -490,7 +492,11 @@ ul {
      z-index:1;
      cursor:pointer;
      font-size:50px;
-      -webkit-transform: scale(4,1);
+      transform: scale(2,2);
+      -moz-transform: scale(2,2);
+      -ms-transform: scale(2,2);
+      -webkit-transform: scale(2,2);
+      -o-transform: scale(2,2);
       margin:1rem 0;
     }
     .radio-label::after {
