@@ -353,8 +353,51 @@ ul {
 }
 
 /**
+ * Look de Capsule 3 Template
+ *
+ */
+
+ .lookbook {
+   width:100%;
+   min-height:100vh;
+   img {
+     max-width:90%;
+     margin:10% auto;
+   }
+   a {
+     color:greenyellow;
+     position:absolute;
+     font-size:1.8rem;
+     font-weight:100;
+     &.link1 {
+       top: 20%;
+       right:32%;
+       text-align:left;
+       &::after {
+         content: "Voir ce produit";
+         color: greenyellow;
+         font-size: 0.8rem;
+         line-height: 1rem;
+         display: block;
+         border-bottom: 1px solid greenyellow;
+       }
+     }
+     &.link2 {
+       top:40%;
+       right:30%;
+     }
+     &.link3 {
+       top:55%;
+       right:40%;
+     }
+   }
+
+ }
+
+
+/**
  * Featured Collection Template
- * AKA Look de Capsule 3
+ *
  */
 
  #sort-by {
