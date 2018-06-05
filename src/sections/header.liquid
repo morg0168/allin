@@ -75,11 +75,11 @@
           </li>
         {% endif %}
       {% endfor %}
+      {% include 'currency-picker' %}
       <a href="/cart">
         {{ 'layout.cart.title' | t }}
         ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
       </a>
-      {% include 'currency-picker' %}
     </ul>
 
     {%- assign footer_linklist = section.settings.footer_linklist -%}

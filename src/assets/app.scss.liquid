@@ -247,6 +247,7 @@ input:focus, textarea:focus, button:focus {
 }
 
 nav {
+  font-size:11px;
   height:100%;
   .site-nav {
     &.top {
@@ -281,6 +282,11 @@ ul {
   border-right:1px solid black;
   ul {
     padding:0 0 0 20px;
+    li.site-nav--active {
+      a {
+        color:red;
+      }
+    }
   }
 }
 
@@ -305,6 +311,11 @@ ul {
     .col:first-of-type {
       padding-left:5px;
     }
+}
+
+.currency-picker__wrapper {
+  display:block;
+  margin-top:25px;
 }
 
 /**
