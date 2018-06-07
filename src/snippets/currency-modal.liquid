@@ -1,0 +1,57 @@
+<div class="currency-picker__wrapper">
+   <span class="currency-picker__label">Select Currency($)</span>
+
+  <select class="currency-picker" name="currencies" style="display: inline; width: auto; vertical-align: inherit;">
+  {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+  {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+  <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+  {% for code in supported_codes %}
+    {% if code != shop.currency and codes contains code %}
+    <option value="{{ code }}">{{ code }}</option>
+    {% endif %}
+  {% endfor %}
+  </select>
+
+  <div class="row middle-xs">
+    <div class="col-xs-6 start-xs">
+      <label class="radio-label" for="{{ shop.currency }}">{{ shop.currency }}</label>
+    </div>
+    <div class="col-xs-6 end-xs radio-contain">
+      <input type="radio" value="{{ shop.currency }}" selected="selected" name="modal-radio" />
+      <div class="pseudo-radio"></div>
+    </div>
+    {% for code in supported_codes %}
+      {% if code != shop.currency and codes contains code %}
+      <div class="col-xs-6 start-xs">
+        <label class="radio-label" for="{{ code }}">{{ code }}</label>
+      </div>
+      <div class="col-xs-6 end-xs radio-contain">
+        <input type="radio" value="{{ code }}" name="modal-radio" />
+        <div class="pseudo-radio"></div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+
+'use strict';
+
+(function ($, root, undefined) {
+
+  $(document).ready(function () {
+
+    $('[name=modal-radio]').click(function() {
+       var $optionValue = $(this).val();
+       var $correspondingOptionValue = $('.currency-picker__wrapper .currency-picker');
+       $correspondingOptionValue.val($optionValue);
+       $(this).closest('.row').find('[name=modal-radio]').removeClass('active');
+       $(this).addClass('active');
+       $('[name=currencies]').trigger('change');
+    });
+
+  });
+
+})(jQuery, this);
+</script>

@@ -1,2 +1,91 @@
+<!-- <button class="trigger">Click here to trigger the modal!</button> -->
+<div class="modal">
+     <div class="modal-content">
+       <div class="row middle-xs center-xs inner">
+         <img src="{{ 'logo.png' | asset_url }}"
+              alt="{{ shop.name }}"
+              itemprop="logo">
+              <div class="select-currency">
+                {% include 'currency-modal' %}
+              </div>
+          <div class="col-xs-9 start-xs enter">
+            <span>Enter</span>
+          </div>
+          <div class="col-xs-3 end-xs arrow trigger close-button">
+            <span>></span>
+          </div>
+       </div>
+     </div>
+ </div>
+
+<script>
+  //Cookie for language and currency switcher modal
+  'use strict';
+
+  function setCookie(name, value, days) {
+    var expires = '';
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days*24*60*60*1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+      var dc = document.cookie;
+      var prefix = name + "=";
+      var begin = dc.indexOf("; " + prefix);
+      if (begin == -1) {
+          begin = dc.indexOf(prefix);
+          if (begin != 0) return null;
+      }
+      else
+      {
+          begin += 2;
+          var end = document.cookie.indexOf(";", begin);
+          if (end == -1) {
+          end = dc.length;
+          }
+      }
+      // because unescape has been deprecated, replaced with decodeURI
+      //return unescape(dc.substring(begin + prefix.length, end));
+      return decodeURI(dc.substring(begin + prefix.length, end));
+  }
+
+  var modal = document.querySelector(".modal");
+  var trigger = document.querySelector(".trigger");
+  var closeButton = document.querySelector(".close-button");
+
+  function toggleCookie() {
+      var x = getCookie('firstVisit');
+      if (!x) {
+        modal.classList.toggle("show-modal");
+        setCookie('firstVisit','firstVisit', 7);
+      }
+      var $cookieCurrency = Currency.cookie.read();
+      var $correspondingRadio = '[value=' + $cookieCurrency + ']';
+      $('.select-currency').find('[name=modal-radio]').removeClass('active');
+      $('.select-currency').find($correspondingRadio).addClass('active');
+  }
+
+  function toggleModal() {
+      modal.classList.toggle("show-modal");
+  }
+
+  function windowOnClick(event) {
+      if (event.target === modal) {
+          toggleModal();
+      }
+  }
+
+  trigger.addEventListener("click", toggleModal);
+  closeButton.addEventListener("click", toggleModal);
+  window.addEventListener("click", windowOnClick);
+  window.addEventListener("load", toggleCookie);
+
+</script>
+
+
 {% include 'lookbook' %}
 {{ content_for_index }}

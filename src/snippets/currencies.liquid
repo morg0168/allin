@@ -57,6 +57,8 @@ jQuery('[name=currencies]').val(Currency.currentCurrency).change(function() {
   var newCurrency = jQuery(this).val();
   Currency.convertAll(oldCurrency, newCurrency);
   jQuery('.selected-currency').text(Currency.currentCurrency);
+  //Bind the two currency switcher instances
+  jQuery('[name=currencies]').val($(this).val());
 });
 
 //Custom function for coverting currencies after Sort Ajax on homepage
