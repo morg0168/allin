@@ -2,81 +2,220 @@
 // contact : emily.a.morgan@gmail.com
 
 // mixins
-
 /*============================================================================
   Dependency-free breakpoint mixin
     - http://blog.grayghostvisuals.com/sass/sass-media-query-mixin/
 ==============================================================================*/
-$min: min-width;
-$max: max-width;
-@mixin at-query ($constraint, $viewport1, $viewport2:null) {
-  @if $constraint == $min {
-    @media screen and ($min: $viewport1) {
-      @content;
-    }
-  } @else if $constraint == $max {
-    @media screen and ($max: $viewport1) {
-      @content;
-    }
-  } @else {
-    @media screen and ($min: $viewport1) and ($max: $viewport2) {
-      @content;
-    }
-  }
-}
+@charset "UTF-8";
+/*============================================================================
+  [replace with theme name] | Built with Slate
+    - You cannot use native CSS/Sass @imports in this file without a build script
+==============================================================================*/
 
-$viewportIncrement: 1px;
-$siteWidth: 1050px;
-$small: 590px;
-$Regular: 768px;
-$large: 769px;
-$xlarge: $siteWidth + $viewportIncrement;
-
-$postSmall: $small + $viewportIncrement;
-$preRegular: $Regular - $viewportIncrement;
-$preLarge: $large - $viewportIncrement;
-
-/*================ The following are dependencies of csswizardry grid ================*/
-$breakpoints: (
-  'small' '(max-width: #{$small})',
-  'Regular' '(min-width: #{$postSmall}) and (max-width: #{$Regular})',
-  'Regular-down' '(max-width: #{$Regular})',
-  'large' '(min-width: #{$large})'
-);
-$breakpoint-has-widths: ('small', 'Regular', 'Regular-down', 'large');
-$breakpoint-has-push:  ('Regular', 'Regular-down', 'large');
-$breakpoint-has-pull:  ('Regular', 'Regular-down', 'large');
-
+/*================ UTILS ================*/
+/*================ Mixins ================*/
 @mixin clearfix() {
-  &:after {
+  &::after {
     content: '';
     display: table;
     clear: both;
   }
+
+  // sass-lint:disable
+  *zoom: 1;
 }
 
-@mixin font-smoothing () {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/*============================================================================
+  Prefix mixin for generating vendor prefixes.
+  Based on https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/addons/_prefixer.scss
 
-@mixin responsive-typo ( $min-size : 12, $max-size : 21, $min-width : 420, $max-width : 1280 ) {
-  font-size: calc( #{$min-size + px} + #{$max-size - $min-size} * ( (100vw - #{$min-width + px}) / #{$max-width - $min-width}));
-  @media screen and (max-width: $min-width + px ) {
-    font-size :  $min-size + px;
+  Usage:
+    // Input:
+    .element {
+      @include prefix(transform, scale(1), ms webkit spec);
+    }
+
+    // Output:
+    .element {
+      -ms-transform: scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+==============================================================================*/
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: $value;
+    } @else if $prefix == moz {
+      -moz-#{$property}: $value;
+    } @else if $prefix == ms {
+      -ms-#{$property}: $value;
+    } @else if $prefix == o {
+      -o-#{$property}: $value;
+    } @else if $prefix == spec {
+      #{$property}: $value;
+    } @else  {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
   }
-  @media screen and (min-width: $max-width + px) {
-    font-size : $max-size + px;
+}
+
+/*================ Media Query Mixin ================*/
+@mixin media-query($media-query) {
+  $breakpoint-found: false;
+
+  @each $breakpoint in $breakpoints {
+    $name: nth($breakpoint, 1);
+    $declaration: nth($breakpoint, 2);
+
+    @if $media-query == $name and $declaration {
+      $breakpoint-found: true;
+
+      @media only screen and #{$declaration} {
+        @content;
+      }
+    }
+  }
+
+  @if $breakpoint-found == false {
+    @warn 'Breakpoint "#{$media-query}" does not exist';
   }
 }
 
-@mixin prefix($property, $value) {
-  -webkit-#{$property}: #{$value};
-  -moz-#{$property}: #{$value};
-  -ms-#{$property}: #{$value};
-  -o-#{$property}: #{$value};
-  #{$property}: #{$value};
+/*================ Responsive Show/Hide Helper ================*/
+@mixin responsive-display-helper($breakpoint: '') {
+  // sass-lint:disable no-important
+  .#{$breakpoint}show {
+    display: block !important;
+  }
+
+  .#{$breakpoint}hide {
+    display: none !important;
+  }
 }
+
+
+/*================ Responsive Text Alignment Helper ================*/
+@mixin responsive-text-align-helper($breakpoint: '') {
+  // sass-lint:disable no-important
+  .#{$breakpoint}text-left {
+    text-align: left !important;
+  }
+
+  .#{$breakpoint}text-right {
+    text-align: right !important;
+  }
+
+  .#{$breakpoint}text-center {
+    text-align: center !important;
+  }
+}
+
+@mixin visually-hidden() {
+  // sass-lint:disable no-important
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+@mixin visually-shown($position: inherit) {
+  // sass-lint:disable no-important
+  position: $position !important;
+  overflow: auto;
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+
+/*================ SETTINGS ================*/
+/*================ Color Variables ================*/
+$color-primary: {{ settings.color_primary }};
+
+// Text colors
+$color-body-text: {{ settings.color_body_text }};
+
+// Backgrounds
+$color-body: #fff;
+
+// Border colors
+$color-border: #f6f6f6;
+
+// Helper colors for form error states
+$color-disabled: #000;
+$color-disabled-border: #000;
+$color-error: #000;
+$color-error-bg: #000;
+$color-success: #000;
+$color-success-bg: #000;
+
+/*================ Typography Variables ================*/
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-weight-header: $font-weight-bold;
+
+$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: {{ settings.type_base_size }};
+
+/*============================================================================
+  Grid Breakpoints and Class Names
+    - Do not change the variable names
+==============================================================================*/
+$grid-medium: 750px;
+$grid-large: 990px;
+$grid-widescreen: 1400px;
+$grid-gutter: 30px;
+
+$small: 'small';
+$medium: 'medium';
+$medium-down: 'medium-down';
+$medium-up: 'medium-up';
+$large: 'large';
+$large-down: 'large-down';
+$large-up: 'large-up';
+$widescreen: 'widescreen';
+
+// The `$breakpoints` list is used to build our media queries.
+// You can use these in the media-query mixin.
+$breakpoints: (
+  $small '(max-width: #{$grid-medium - 1})',
+  $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
+  $medium-down '(max-width: #{$grid-large - 1})',
+  $medium-up '(min-width: #{$grid-medium})',
+  $large '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
+  $large-down '(max-width: #{$grid-widescreen - 1})',
+  $large-up '(min-width: #{$grid-large})',
+  $widescreen '(min-width: #{$grid-widescreen})'
+);
+
+/*============================================================================
+  Generate breakpoint-specific column widths and push classes
+    - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
+    - Default is no push classes
+    - Will not work if `styles/global/grid.scss` is removed
+==============================================================================*/
+$breakpoint-has-widths: ($small, $medium-up);
+$breakpoint-has-push: ();
+
+/*================ Sizing Variables ================*/
+$width-site: 1180px;
+$gutter: 30px;
+
+/*================ Z-Index ================*/
+$z-index-dropdown: 2;
+$z-index-skip-to-content: 10000; // really high to be safe of app markup
+
+/*================ SVG ================*/
+$svg-select-icon: #{'{{ "ico-select.svg" | asset_url }}'};
+
 
 // animations
 @-webkit-keyframes animLeftSlidshow {
@@ -330,6 +469,8 @@ ul {
  * Generic Collection Template
  */
 .product-itemlist-container {
+  margin-left:0;
+  margin-right:0;
    img {
      max-width:300px;
    }
@@ -671,3 +812,122 @@ ul {
       transform: scale(1.0);
       transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
   }
+  #toggle {
+    display:none;
+  }
+
+  /*================ RESPONSIVE NAVIGATION Styles ================*/
+  @include media-query($small) {
+    body {
+      margin-left:0;
+    }
+    #main-header {
+      width:0;
+      position: fixed;
+      width: 0;
+      top: 0;
+      background-color: #000;
+      opacity: 1;
+      overflow-x: hidden;
+      height: 100%;
+      transition: .5s;
+      z-index:99;
+      nav {
+        opacity:0;
+        transition: .5s;
+        ul {
+          padding:0;
+          width:100%;
+          text-align: center;
+          li {
+            a {
+              color:greenyellow;
+            }
+            &.site-nav--active {
+              a {
+                color:white;
+              }
+            }
+          }
+          &.site-nav.bottom {
+            position:static;
+          }
+        }
+        a, select, span, label, option {
+          color:greenyellow;
+        }
+      }
+    }
+
+    .container{
+    	width: 100%;
+    	min-height: 100%;
+    	position: relative;
+    }
+
+    /* this is the checkbox */
+    #toggle{
+    	display: none;
+    }
+
+    /*display: flex for equal/auto child margins*/
+    .rows-container{
+    	position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index:999;
+
+    /*	used a 16:9 ratio for width & height*/
+    	width: 30px;
+    	height: 20px;
+    	cursor: pointer;
+    	margin: auto;
+    	display: flex;
+    }
+
+    /*menu is responsive to dimensions of label/.rows-container above*/
+    .rows{
+    	position: relative;
+    	width: 100%;
+    	height: 20%;
+    	background-color: greenyellow;
+    	margin: auto;
+
+    	-o-transition: 0.46s;
+    	-ms-transition: 0.46s;
+    	-moz-transition: 0.46s;
+    	-webkit-transition: 0.46s;
+    	transition: 0.46s;
+      margin-left:0;
+      margin-right:0;
+    }
+
+    .rows:before, .rows:after{
+    	position: absolute;
+    	content: '';
+    	background-color: inherit;
+    	width: 100%;
+    	height: 100%;
+
+    	-o-transition: 0.46s;
+    	-ms-transition: 0.46s;
+    	-moz-transition: 0.46s;
+    	-webkit-transition: 0.46s;
+    	transition: 0.46s;
+    }
+
+    .rows:before{top: 200%; display:none;}
+
+    .rows:after{top: -200%;}
+
+    #toggle:checked + .rows-container .rows{
+    /*	possible rotations (either positive/negative) -> 45, 135, 225, 315*/
+    	transform: rotate(135deg)
+    }
+
+    #toggle:checked + .rows-container .rows:before, #toggle:checked + .rows-container .rows:after{
+    /*	possible rotations (either postive/negative -> 90, 270*/
+    	transform: rotate(90deg);
+    	top: 0
+    }
+}

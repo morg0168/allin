@@ -5,7 +5,8 @@
     }
   {% endif %}
 </style>
-<div data-section-id="{{ section.id }}" data-section-type="header-section" id="main-header">
+<!-- <div id="navbar" class="overlay"> -->
+<div data-section-id="{{ section.id }}" data-section-type="header-section" id="main-header" class="overlay main-header">
   <header role="banner">
     {% if template.name == 'index' %}
       <h1 itemscope itemtype="http://schema.org/Organization">
@@ -93,6 +94,40 @@
 
   </nav>
 </div>
+
+<div id="container">
+			<input type="checkbox" id="toggle">
+			<label for="toggle" class="rows-container">
+        <div class="rows"></div>
+  </label>
+</div>
+
+<script>
+
+  'use strict';
+
+  var toggleNav = document.getElementById("container");
+  var mainNav = document.getElementById("main-header");
+  let navigationLinks = document.getElementsByTagName('nav')[0];
+
+
+function controlNav () {
+  var toggle = document.getElementById("toggle");
+  if (toggle.checked === true) {
+    	mainNav.style.width="100%";
+      navigationLinks.style.opacity = "1";
+  } else {
+      mainNav.style.width="0";
+      navigationLinks.style.opacity = "0";
+  }
+}
+toggleNav.addEventListener("click", function() {
+  controlNav();
+});
+
+</script>
+
+<!-- </div> -->
 
 {% schema %}
   {
