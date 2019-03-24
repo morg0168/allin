@@ -16,19 +16,7 @@
   <div class="row product-itemlist-container" id="toggle-product-container">
 
   {%- assign collectionClone = collection.products -%}
-  {% include 'dump' with collectionClone %}
-  <script>
-  var collectionClone = "{{ collection.products }}"
-  function compare(a,b) {
-    if (a.price < b.price)
-      return -1;
-    if (a.price > b.price)
-      return 1;
-    return 0;
-  }
 
-  collectionClone.sort(compare);
-  </script>
   {% for product in collectionClone %}
     <div class="col-xs-12 col-sm-6 center-xs">
       <a href="{{ product.url | within: collection }}">
