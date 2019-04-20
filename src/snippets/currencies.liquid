@@ -40,7 +40,7 @@ if (cookieCurrency == null) {
   }
 }
 // If the cookie value does not correspond to any value in the currency dropdown.
-else if (jQuery('[name=currencies]').size() && jQuery('[name=currencies] option[value=' + cookieCurrency + ']').size() === 0) {
+else if (jQuery('[name=currencies]').length && jQuery('[name=currencies] option[value=' + cookieCurrency + ']').length === 0) {
   Currency.currentCurrency = shopCurrency;
   Currency.cookie.write(shopCurrency);
 }
