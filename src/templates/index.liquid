@@ -1,5 +1,5 @@
-<!-- <button class="trigger">Click here to trigger the modal!</button> -->
-<div class="modal">
+
+<div class="modal show-modal">
      <div class="modal-content">
        <div class="row middle-xs center-xs inner">
          <img src="{{ 'logo.png' | asset_url }}"
@@ -11,7 +11,7 @@
           <div class="col-xs-9 start-xs enter">
             <span>Enter</span>
           </div>
-          <div class="col-xs-3 end-xs arrow trigger close-button">
+          <div class="col-xs-3 end-xs arrow close-button">
             <span>></span>
           </div>
        </div>
@@ -53,15 +53,17 @@
       return decodeURI(dc.substring(begin + prefix.length, end));
   }
 
-  var modal = document.querySelector(".modal");
-  var trigger = document.querySelector(".trigger");
-  var closeButton = document.querySelector(".close-button");
+  var $modal = document.querySelector(".modal");
+  var $modalContent = document.querySelector(".modal-content");
+  var $closeButton = document.querySelector(".close-button");
 
   function toggleCookie() {
       var x = getCookie('firstVisit');
       if (!x) {
-        modal.classList.toggle("show-modal");
+        $modalContent.classList.add("show-modal-content");
         setCookie('firstVisit','firstVisit', 7);
+      } else {
+        $modal.classList.remove("show-modal");
       }
       var $cookieCurrency = Currency.cookie.read();
       var $correspondingRadio = '[value=' + $cookieCurrency + ']';
@@ -69,19 +71,7 @@
       $('.select-currency').find($correspondingRadio).addClass('active');
   }
 
-  function toggleModal() {
-      modal.classList.toggle("show-modal");
-  }
-
-  function windowOnClick(event) {
-      if (event.target === modal) {
-          toggleModal();
-      }
-  }
-
-  trigger.addEventListener("click", toggleModal);
-  closeButton.addEventListener("click", toggleModal);
-  window.addEventListener("click", windowOnClick);
+  $closeButton.addEventListener("click", () => $modal.classList.remove("show-modal"));
   window.addEventListener("load", toggleCookie);
 
 </script>
