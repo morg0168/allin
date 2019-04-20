@@ -63,7 +63,7 @@
         $modalContent.classList.add("show-modal-content");
         setCookie('firstVisit','firstVisit', 7);
       } else {
-        $modal.classList.remove("show-modal");
+        closeModal();
       }
       var $cookieCurrency = Currency.cookie.read();
       var $correspondingRadio = '[value=' + $cookieCurrency + ']';
@@ -71,7 +71,11 @@
       $('.select-currency').find($correspondingRadio).addClass('active');
   }
 
-  $closeButton.addEventListener("click", () => $modal.classList.remove("show-modal"));
+  function closeModal() {
+    $modal.classList.remove("show-modal");
+    $modalContent.classList.remove("show-modal-content");
+  }
+  $closeButton.addEventListener("click", () => closeModal());
   window.addEventListener("load", toggleCookie);
 
 </script>
