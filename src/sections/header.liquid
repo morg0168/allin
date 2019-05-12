@@ -5,9 +5,53 @@
     }
   {% endif %}
 </style>
+<div class="mobile-fixed-header mobile-only">
+  {% if template.name == 'index' %}
+    <h1 itemscope itemtype="http://schema.org/Organization">
+  {% else %}
+    <div class="h1" itemscope itemtype="http://schema.org/Organization">
+  {% endif %}
+      <a href="/" itemprop="url" class="site-logo site-header__logo-image">
+
+          <img src="{{ 'logo.svg' | asset_url }}"
+               alt="{{ shop.name }}"
+               itemprop="logo">
+      </a>
+  {% if template.name == 'index' %}
+    </h1>
+  {% else %}
+    </div>
+  {% endif %}
+
+  {% if shop.customer_accounts_enabled %}
+    <ul>
+      {% if customer %}
+        <li>
+          {% if customer.first_name != blank %}
+            {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+            {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+          {% else %}
+            <a href="/account">{{ 'layout.customer.account' | t }}</a>
+          {% endif %}
+        </li>
+        <li>
+          {{ 'layout.customer.log_out' | t | customer_logout_link }}
+        </li>
+      {% else %}
+        <li>
+          {{ 'layout.customer.log_in' | t | customer_login_link }}
+        </li>
+        <li>
+          {{ 'layout.customer.create_account' | t | customer_register_link }}
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+</div>
 <!-- <div id="navbar" class="overlay"> -->
 <div data-section-id="{{ section.id }}" data-section-type="header-section" id="main-header" class="overlay main-header">
-  <header role="banner">
+  <header role="banner" class="desktop-only">
     {% if template.name == 'index' %}
       <h1 itemscope itemtype="http://schema.org/Organization">
     {% else %}
@@ -53,6 +97,7 @@
   </header>
 
   <nav role="navigation">
+  <div class="toggle-close" id="toggle-close">x</div>
     <ul class="site-nav top">
       {% for link in linklists[section.settings.main_linklist].links %}
         {%- assign child_list_handle = link.title | handleize -%}
@@ -95,10 +140,12 @@
   </nav>
 </div>
 
-<div id="container">
+<div id="container" class="mobile-only">
 			<input type="checkbox" id="toggle">
 			<label for="toggle" class="rows-container">
-        <div class="rows"></div>
+        <img src="{{ 'toggle.svg' | asset_url }}"
+             alt="toggle.svg"
+            >
   </label>
 </div>
 
@@ -107,22 +154,28 @@
   'use strict';
 
   var toggleNav = document.getElementById("container");
+  var toggleClose = document.getElementById("toggle-close");
   var mainNav = document.getElementById("main-header");
   let navigationLinks = document.getElementsByTagName('nav')[0];
 
 
-function controlNav () {
+function openNav () {
   var toggle = document.getElementById("toggle");
-  if (toggle.checked === true) {
     	mainNav.style.width="100%";
       navigationLinks.style.opacity = "1";
-  } else {
-      mainNav.style.width="0";
-      navigationLinks.style.opacity = "0";
+      mainNav.classList += !mainNav.classList.contains('middle-xs') ? ' row middle-xs ' : '';
+      document.body.classList += ' overflow-none ';
   }
+function closeNav() {
+  mainNav.style.width="0";
+  navigationLinks.style.opacity = "0";
+  document.body.classList.remove('overflow-none');
 }
 toggleNav.addEventListener("click", function() {
-  controlNav();
+  openNav();
+});
+toggleClose.addEventListener("click", function() {
+  closeNav()
 });
 
 </script>
