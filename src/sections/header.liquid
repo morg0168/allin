@@ -97,7 +97,7 @@
   </header>
 
   <nav role="navigation">
-  <div class="toggle-close" id="toggle-close">x</div>
+  <div class="toggle-close mobile-only" id="toggle-close">x</div>
     <ul class="site-nav top">
       {% for link in linklists[section.settings.main_linklist].links %}
         {%- assign child_list_handle = link.title | handleize -%}
