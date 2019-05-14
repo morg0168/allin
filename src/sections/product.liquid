@@ -11,13 +11,30 @@
 
 
 <div class="row middle-xs center-xs product-item-container">
+  <div class="col-xs-6 col-sm-8 mobile-only title">
+    <p>{{ product.title }}</p>
+  </div>
+  <div class="col-xs-6 col-sm-8 mobile-only price">
+    <p data-product-price>
+      {{ current_variant.price | money }}
+    </p>
+  </div>
   <div class="col-xs-12 col-sm-8">
     {% if featured_image != blank %}
-      <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+      <!-- <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image> -->
+
+      <div class="slick-slider">
+          {% for image in product.images %}
+        <div style="background: url('{{ image.src | img_url }}');" alt="{{ image.alt | escape }}" class="product-image" data-product-single-thumbnail></div>
+        {% endfor %}
+      </div>
+
     {% endif %}
 
     {% if product.images.size > 1 %}
-      <ul>
+    <!-- <div data-slick='{"slidesToShow": 1}'>
+    </div> -->
+      <!-- <ul>
         {% for image in product.images %}
           <li>
             <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
@@ -25,23 +42,22 @@
             </a>
           </li>
         {% endfor %}
-      </ul>
+      </ul> -->
     {% endif %}
   </div>
 
   <div class="col-xs-12 col-sm-3 start-xs product-information-container">
-    <div class="product-information">
+    <div class="product-information desktop-only">
       <p>{{ product.title }}</p>
-      <p>{{ product.vendor }}</p>
     </div>
     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       <meta itemprop="priceCurrency" content="{{ shop.currency }}">
       <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
       <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
-    <form action="/cart/add" method="post" enctype="multipart/form-data">
-      <div data-price-wrapper>
-        <span data-product-price>
+    <form action="/cart/add" method="post" enctype="multipart/form-data" class="row">
+      <div data-price-wrapper class="col-xs-12 first-md">
+        <span data-product-price class="desktop-only">
           {{ current_variant.price | money }}
         </span>
 
@@ -55,7 +71,7 @@
         {% endif %}
       </div>
 
-      <div class="rte">
+      <div class="rte col-xs-12 last-xs first-md">
         {{ product.description }}
       </div>
 
@@ -142,8 +158,22 @@
             $(this).prev('.radio-label').addClass('active');
           });
 
+          $(".slick-slider").slick({
+            infinite: true,
+            arrows: true,
+            slidesToShow: 1,
+            variableWidth: true,
+            // responsive: [{
+            //   breakpoint: 768,
+            //   settings: {
+            //
+            //
+            //     }
+            //   }]
+            });
+            $(".slick-slider").show();
         });
-
+        //$('.your-element').slick('slickAdd',"<div></div>");
       })(jQuery, this);
       </script>
 
@@ -183,34 +213,39 @@
         </div>
       {% endif %}
 
+
+    <div class="col-xs-12 last-xs">
+      {% if product.options contains 'Size' %}
+        <a class="btn size-chart-open-popup" href="#size-chart">See size chart</a>
+      {% endif %}
+
+      {% comment %} TODO: Conditional to render size chart based on product type{% endcomment %}
+      <div id="size-chart" class="mfp-hide">
+      {{ pages.size-chart-1.content }}
+      </div>
+    </div>
+
+
+      <div class="col-xs-12 last-xs">
+        <a href="/">
+          <div class="row middle-xs retoure-a-la-boutique">
+              <div class="col-xs-2 start-xs no-padding">
+              <p>
+                  <span class="rotate -reflect">></span>
+              </p>
+
+            </div>
+            <div class="col-xs-10 end-xs no-padding">
+              <span>Retoure a la Boutique</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+
     </div>
 
     </form>
-
-
-    <a href="/">
-      <div class="row middle-xs retoure-a-la-boutique">
-          <div class="col-xs-2 start-xs no-padding">
-          <p>
-              <span class="rotate -reflect">></span>
-          </p>
-
-        </div>
-        <div class="col-xs-10 end-xs no-padding">
-          <span>Retoure a la Boutique</span>
-        </div>
-      </div>
-    </a>
-
-    {% if product.options contains 'Size' %}
-      <a class="btn size-chart-open-popup" href="#size-chart">See size chart</a>
-    {% endif %}
-
-    {% comment %} TODO: Conditional to render size chart based on product type{% endcomment %}
-    <div id="size-chart" class="mfp-hide">
-    {{ pages.size-chart-1.content }}
-    </div>
-
   </div>
 
   {% if section.settings.show_share_buttons %}

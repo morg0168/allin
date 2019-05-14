@@ -169,8 +169,8 @@ $font-size-base: {{ settings.type_base_size }};
   Grid Breakpoints and Class Names
     - Do not change the variable names
 ==============================================================================*/
-$grid-medium: 750px;
-$grid-large: 990px;
+$grid-medium: 768px;
+$grid-large: 1024px;
 $grid-widescreen: 1400px;
 $grid-gutter: 30px;
 
@@ -382,7 +382,7 @@ input:focus, textarea:focus, button:focus {
 
 .site-logo img {
   margin:2rem 0 50px 20px;
-  width:100px;
+  width:60px;
 }
 
 .site-logo {
@@ -503,7 +503,7 @@ ul {
    }
  }
 
-.collection {
+.collection  {
   width: 100%;
 }
 
@@ -611,6 +611,25 @@ ul {
      }
    }
  .product-item-container {
+   .slick-slider {
+     display: none;
+     width:314px;
+     height:314px;
+     margin:0 auto;
+     .slick-slide {
+       width:314px;
+       height:314px;
+     }
+     .product-image {
+       background-size: cover!important;
+       background-repeat: no-repeat!important;
+       box-sizing: border-box;
+       position: relative;
+       background-position: center!important;
+       width: 314px!important;
+       height: 314px!important;
+     }
+   }
     img {
       max-width:300px;
     }
@@ -835,8 +854,49 @@ ul {
     display:block!important;
   }
 
+  @include media-query($large-up) {
+    .template-product {
+      .product-item-container {
+        .slick-slider {
+          width:414px;
+          height:414px;
+          .slick-slide {
+            width:414px;
+            height:414px;
+          }
+          .product-image {
+            width: 414px!important;
+            height: 414px!important;
+          }
+        }
+      }
+    }
+  }
+
+  @include media-query($widescreen) {
+    .template-product {
+      .product-item-container {
+        .slick-slider {
+          width:514px;
+          height:514px;
+          .slick-slide {
+            width:514px;
+            height:514px;
+          }
+          .product-image {
+            width: 514px!important;
+            height: 514px!important;
+          }
+        }
+      }
+    }
+  }
+
   /*================ RESPONSIVE NAVIGATION Styles ================*/
   @include media-query($small) {
+    * {
+    //  font-size: 14px;
+    }
     body {
       margin-left:0;
     }
@@ -853,6 +913,7 @@ ul {
       z-index:99;
       margin:0 auto;
       border:none;
+      margin-bottom: 70px;
       nav {
         opacity:0;
         transition: .5s;
@@ -970,7 +1031,35 @@ ul {
  -webkit-text-stroke-color: black;
  cursor:pointer;
     }
+
+    .collection, #shopify-section-product {
+      width: 100%;
+      margin-top:120px;
+
+    }
+
+    /**
+     * Product Template MOBILE
+     */
+    .product-item-container {
+      .title {
+        font-weight:700;
+      }
+      div, p, a, li, ul, label {
+          //  font-size:23px;
+      }
+    }
+    .product-information-container {
+      padding: 2rem;
+      form {
+        .row {
+          margin:0;
+        }
+      }
+    }
 }
+
+
 
   @include media-query($medium) {
 
