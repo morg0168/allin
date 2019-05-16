@@ -47,7 +47,7 @@
   </div>
 
   <div class="col-xs-12 col-sm-3 start-xs product-information-container">
-    <div class="product-information desktop-only">
+    <div class="product-information desktop-only row">
       <p>{{ product.title }}</p>
     </div>
     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -56,10 +56,14 @@
       <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
     <form action="/cart/add" method="post" enctype="multipart/form-data" class="row">
-      <div data-price-wrapper class="col-xs-12 first-md">
+      <div data-price-wrapper class="col-xs-12 last-xs first-sm no-padding">
         <span data-product-price class="desktop-only">
           {{ current_variant.price | money }}
         </span>
+
+        <div class="rte col-xs-12 no-padding">
+          {{ product.description }}
+        </div>
 
         {% if product.compare_at_price_max > product.price %}
           <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
@@ -71,10 +75,6 @@
         {% endif %}
       </div>
 
-      <div class="rte col-xs-12 last-xs first-md">
-        {{ product.description }}
-      </div>
-
       {% unless product.has_only_default_variant %}
 
         {% for option in product.options_with_values %}
@@ -84,12 +84,10 @@
               {% if current_variant.available %}
               <div class="col-xs-10 start-xs">
               <label class="SingleOptionSelector-{{ forloop.index0 }}" for="SingleOptionSelector-{{ forloop.index0 }}">
-                {{ option.name }}
+                Select your {{ option.name }}
               </label>
             </div>
-            <div class="col-xs-2 end-xs">
-              <span class="rotate">></span>
-            </div>
+
             {% endif %}
           </div>
 
@@ -112,7 +110,7 @@
             <div class="row middle-xs size-selects">
               {% for variant in product.variants %}
                 {% if variant.available %}
-                <div class="col col-xs-2">
+                <div class="col col-xs-1">
                   <label class="radio-label" for="{{ variant.title | escape }}">
                     {{ variant.title }}
                   </label>
@@ -150,7 +148,8 @@
               value.selected = false;
               if (newString == optionValue) {
                 value.selected = true;
-                console.log(value);
+                //console.log({{product.variants[value]}});
+                console.log($('select.quantity').html());
                 return value;
               }
             });
@@ -178,12 +177,12 @@
       </script>
 
       <button
-        type="submit" class="add-to-cart"
+        type="submit" class="btn-contain add-to-cart"
         name="add"
         data-add-to-cart
         {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-        <div class="row middle-xs cart-text-contain {% unless current_variant.available %}{{ 'out' }}{% endunless %}">
-          <div class="col-xs-10 start-xs col">
+        <div class="row between-xs middle-xs cart-text-contain {% unless current_variant.available %}{{ 'out' }}{% endunless %}">
+          <div class="col-xs-8 start-xs col btn-1">
           <span data-add-to-cart-text>
             {% if current_variant.available %}
               {{ 'products.product.add_to_cart' | t }}
@@ -192,58 +191,62 @@
             {% endif %}
           </span>
         </div>
-        <div class="col-xs-2 end-xs">
-          <span>></span>
+        <div class="col-xs-3 end-xs btn-2">
+          <span>+</span>
         </div>
+
         </div>
+
       </button>
 
-
       {% if current_variant.available %}
-        <div class="row middle-xs">
-            <div class="col-xs-10 start-xs">
+        <div class="row middle-xs between-xs btn-contain">
+            <div class="col-xs-8 start-xs btn-1">
             <label for="Quantity">
               {{ 'products.product.quantity' | t }}
             </label>
-              <input type="number" id="Quantity" name="quantity" value="1" min="1">
           </div>
-          <div class="col-xs-2 end-xs">
-            <span class="rotate">></span>
+          <div class="col-xs-3 end-xs btn-2">
+            <select class="quantity" type="number" id="Quantity" name="quantity" value="1" min="1">
+              {% for quantity in product.selected_variant %}
+              <option value="{{ quantity }}">
+                {{ quantity | t }}
+              </option>
+              {% endfor %}
+            </select>
           </div>
         </div>
       {% endif %}
-
-
-    <div class="col-xs-12 last-xs">
-      {% if product.options contains 'Size' %}
-        <a class="btn size-chart-open-popup" href="#size-chart">See size chart</a>
-      {% endif %}
+    <div class="row middle-xs between-xs btn-contain">
+      <div class="col-xs-12 btn-1 checkout">
+          <a class="btn " href="/cart">Check out now</a>
+      </div>
+    </div>
 
       {% comment %} TODO: Conditional to render size chart based on product type{% endcomment %}
-      <div id="size-chart" class="mfp-hide">
-      {{ pages.size-chart-1.content }}
-      </div>
-    </div>
+      <div class="row middle-xs between-xs btn-contain last-xs">
+        <div class="col-xs-8 start-xs btn-1">
+          {% if product.options contains 'Size' %}
+            <a class="btn size-chart-open-popup" href="#size-chart">See size chart</a>
+          {% endif %}
+        </div>
 
-
-      <div class="col-xs-12 last-xs">
-        <a href="/">
-          <div class="row middle-xs retoure-a-la-boutique">
-              <div class="col-xs-2 start-xs no-padding">
-              <p>
-                  <span class="rotate -reflect">></span>
-              </p>
-
-            </div>
-            <div class="col-xs-10 end-xs no-padding">
-              <span>Retoure a la Boutique</span>
-            </div>
+          <div class=" mfp-hide"  id="size-chart">
+            {{ pages.size-chart-1.content }}
           </div>
-        </a>
-      </div>
+          <div class="col-xs-3 end-xs btn-2">
+            <span>+</span>
+          </div>
+        </div>
 
-
-    </div>
+        <div class="row middle-xs between-xs last-xs retoure-a-la-boutique btn-contain">
+          <div class="col-xs-8 no-padding btn-1">
+            <a href="/"><span>Back to webstore</span></a>
+          </div>
+          <div class="col-xs-3 end-xs btn-2">
+            <a href="/"><span><</span></a>
+          </div>
+        </div>
 
     </form>
   </div>
