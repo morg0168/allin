@@ -472,12 +472,26 @@ ul {
 .product-itemlist-container {
   margin-left:0;
   margin-right:0;
+  .product-img-link {
+    // display: inline-block;
+    .collection-list-img-contain {
+      margin:0 auto;
+      width: 277px;
+      height: 277px;
+      background-size: cover!important;
+      background-repeat: no-repeat!important;
+      background-position: center!important;
+    }
+  }
    img {
      max-width:300px;
    }
    .product-information {
-     margin: 2rem auto 100px auto;
-     max-width: 200px;
+      width: 277px;
+      padding: 0;
+      margin: 15px auto 140px auto;
+      max-width: none;
+      display: inline-flex;
      &.available {
        text-align: left;
      }
@@ -490,12 +504,16 @@ ul {
        margin:0;
      }
      .go-to-product {
-       background-color: yellow;
+       background-color: white;
+       border: 1px solid black;
        text-align: right;
        margin: 0 auto;
-       width: 50px;
-       padding: 0.5rem 5px 0.5rem 5px;
+       width: 46px;
+       padding: 1rem 5px 1rem 5px;
        display: inline-block;
+       span {
+         display: block;
+       }
      }
    }
  }
@@ -505,7 +523,7 @@ ul {
 }
 
 /**
- * Look de Capsule 3 Template
+ * Lookbook Template
  *
  */
 
@@ -544,7 +562,9 @@ ul {
        right:40%;
      }
    }
-
+  .lookbook-img-contain {
+    position:relative;
+  }
  }
 
 
@@ -1069,6 +1089,15 @@ ul {
           margin:0;
         }
       }
+    }
+
+    /**
+     * Collection List Template MOBILE
+     */
+    .product-itemlist-container {
+      .product-information {
+         margin: 15px auto 70px auto;
+        }
     }
 }
 
