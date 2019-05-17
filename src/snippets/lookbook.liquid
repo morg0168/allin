@@ -1,13 +1,47 @@
 <div class="row middle-xs center-xs lookbook">
+
 {% assign images = "1.JPG, 2.JPG, 3.JPG, 4.JPG, 5.JPG, 6.JPG, 7.JPG, 8.JPG, 9.JPG, 10.JPG, 11.JPG, 12.JPG, 13.JPG, 14.JPG, 15.JPG, 16.JPG, 17.JPG, 18.JPG, 19.JPG, 20.JPG, 21.JPG, 22.JPG, 23.JPG, 24.JPG" | split: ", " %}
+<!-- hats -->
+{% assign link1 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+<!-- glasses -->
+{% assign link2 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+<!-- scarf -->
+{% assign link3 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+<!-- top -->
+{% assign link4 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+<!-- pants -->
+{% assign link5 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+<!-- gloves -->
+{% assign link6 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+<!-- shoes -->
+{% assign link7 = "#1, null, #3, #4, null, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24" | split: ", " %}
+
 {% for image in images %}
   <div class="col-xs-12 col-sm-7 lookbook-img-contain">
     <img src="{{ image | asset_url }}"
          alt="lookbook"
          itemprop="logo" />
-    <a href="#" class="link1">+</a>
-    <a href="#" class="link2">+</a>
-    <a href="#" class="link3">+</a>
+         {% if link1[forloop.index0] != 'null' %}
+        <a href="{{ link1[forloop.index0] }}" class="link1">+</a>
+         {% endif %}
+         {% if link2[forloop.index0] != 'null' %}
+        <a href="{{ link2[forloop.index0] }}" class="link2">+</a>
+         {% endif %}
+         {% if link3[forloop.index0] != 'null' %}
+        <a href="{{ link3[forloop.index0] }}" class="link3">+</a>
+         {% endif %}
+         {% if link4[forloop.index0] != 'null' %}
+        <a href="{{ link4[forloop.index0] }}" class="link4">+</a>
+         {% endif %}
+         {% if link5[forloop.index0] != 'null' %}
+        <a href="{{ link5[forloop.index0] }}" class="link5">+</a>
+         {% endif %}
+         {% if link6[forloop.index0] != 'null' %}
+        <a href="{{ link6[forloop.index0] }}" class="link6">+</a>
+         {% endif %}
+         {% if link7[forloop.index0] != 'null' %}
+        <a href="{{ link7[forloop.index0] }}" class="link7">+</a>
+         {% endif %}
   </div>
 {% endfor %}
 </div>
