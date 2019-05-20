@@ -696,6 +696,9 @@ ul {
       cursor:pointer;
       margin:1rem 0;
     }
+    .unavailable.radio-label::after {
+      background: red;
+    }
     .radio-label.active::after {
       background: yellow;
       border:1px solid red;
@@ -709,7 +712,7 @@ ul {
     }
     .btn-contain {
       width:100%;
-      margin:1rem auto;
+      margin:0.5rem auto;
       -webkit-appearance: none;
       border: none;
       background: none;
@@ -717,6 +720,16 @@ ul {
       &.add-to-cart {
         .row {
           margin:0;
+        }
+        .success {
+          .btn-1 {
+            color: green;
+          }
+        }
+        .error {
+          .btn-1 {
+            color:red;
+          }
         }
       }
     }
@@ -736,8 +749,10 @@ ul {
     margin-right: auto;
   }
   .checkout {
-    background: #aaa;
+    background: #BCBEC0;
     border: none;
+    margin:0 auto;
+    padding:0.5rem 0;
   }
 }
 
@@ -1103,14 +1118,14 @@ ul {
 
 .btn-1 {
   border:1px solid black;
-  padding:5px 10px;
+  padding:3px 10px;
   //margin-right:20px;
   text-align: left;
 }
 
 .btn-2 {
   border:1px solid black;
-  padding:5px 10px;
+  padding:3px 10px;
   //margin-right:20px;
   text-align: center;
 }

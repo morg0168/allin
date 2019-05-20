@@ -98,25 +98,37 @@
               data-single-option-selector
               data-index="option{{ option.position }}">
                 {% for variant in product.variants %}
-                  {% if variant.available %}
+                  <!-- {% if variant.available %} -->
+                    {% if variant.available %}
+                    {% assign availbilityStatus = ' available ' %}
+                    {% else %}
+                    {% assign availbilityStatus = ' unavailable ' %}
+                  {% endif %}
                 <option
-                  value="{{ variant.title | escape }}">
+                  value="{{ variant.title | escape }}" class="{{ availbilityStatus }}">
                     {{ variant.title }}
                 </option>
-                {% endif %}
+                <!-- {% endif %} -->
               {% endfor %}
             </select>
 
             <div class="row middle-xs size-selects">
               {% for variant in product.variants %}
-                {% if variant.available %}
+                  {% if variant.available %}
+                    {% assign availbilityStatus = ' available ' %}
+                    {% else %}
+                    {% assign availbilityStatus = ' unavailable ' %}
+                  {% endif %}
                 <div class="col col-xs-1">
-                  <label class="radio-label" for="{{ variant.title | escape }}">
+                  <label for="{{ variant.title | escape }}" class="radio-label {{ availbilityStatus }}">
                     {{ variant.title }}
                   </label>
-                  <input type="radio" value="{{ variant.title | escape }}"  name="radio"/>
+                  <input type="radio" value="{{ variant.title | escape }}"  name="radio" class="radio-label {{ availbilityStatus }}"
+                  {% if variant == current_variant %}selected="selected"{% endif %}
+                  {% unless variant.available %}disabled="disabled"{% endunless %}
+                  />
                 </div>
-                {% endif %}
+
               {% endfor %}
             </div>
           </div>
@@ -138,6 +150,9 @@
 
         $(document).ready(function () {
 
+          //Disable checkout button if no size is selected
+          $('.add-to-cart').attr("disabled", true);
+
           $('.selector-wrapper input').click(function() {
             var optionValue = $(this).val();
             //check no js corresponding innerhtml
@@ -148,11 +163,10 @@
               value.selected = false;
               if (newString == optionValue) {
                 value.selected = true;
-                //console.log({{product.variants[value]}});
-                console.log($('select.quantity').html());
                 return value;
               }
             });
+            $('.add-to-cart').attr("disabled", false);
             $(this).closest('form').find('.radio-label').removeClass('active');
             $(this).prev('.radio-label').addClass('active');
           });
@@ -180,7 +194,7 @@
         type="submit" class="btn-contain add-to-cart"
         name="add"
         data-add-to-cart
-        {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+        {% unless current_variant.available %}disabled="disabled"{% endunless %} >
         <div class="row between-xs middle-xs cart-text-contain {% unless current_variant.available %}{{ 'out' }}{% endunless %}">
           <div class="col-xs-8 start-xs col btn-1">
           <span data-add-to-cart-text>
@@ -207,45 +221,51 @@
             </label>
           </div>
           <div class="col-xs-3 end-xs btn-2">
-            <select class="quantity" type="number" id="Quantity" name="quantity" value="1" min="1">
+            <span class="quantity cart-count"></span>
+            <!-- <select class="quantity" type="number" id="Quantity" name="quantity" value="1" min="1">
               {% for quantity in product.selected_variant %}
               <option value="{{ quantity }}">
                 {{ quantity | t }}
               </option>
               {% endfor %}
-            </select>
+            </select> -->
           </div>
         </div>
       {% endif %}
     <div class="row middle-xs between-xs btn-contain">
-      <div class="col-xs-12 btn-1 checkout">
-          <a class="btn " href="/cart">Check out now</a>
-      </div>
+        <a class="row col-xs-12 middle-xs checkout" href="/cart" >
+          <div class="col-xs-9">
+            <span>Check out now</span>
+          </div>
+          <div class="col-xs-3 end-xs">
+            <span>></span>
+          </div>
+        </a>
     </div>
 
       {% comment %} TODO: Conditional to render size chart based on product type{% endcomment %}
       <div class="row middle-xs between-xs btn-contain last-xs">
-        <div class="col-xs-8 start-xs btn-1">
-          {% if product.options contains 'Size' %}
-            <a class="btn size-chart-open-popup" href="#size-chart">See size chart</a>
-          {% endif %}
-        </div>
+        <a href="#size-chart" class=" size-chart-open-popup col-xs-8 start-xs btn-1">
+            {% if product.options contains 'Size' %}
+              <span>See size chart</span>
+            {% endif %}
+        </a>
 
           <div class=" mfp-hide"  id="size-chart">
             {{ pages.size-chart-1.content }}
           </div>
-          <div class="col-xs-3 end-xs btn-2">
-            <span>+</span>
-          </div>
+          <a href="#size-chart" class=" size-chart-open-popup col-xs-3 end-xs btn-2">
+              <span>+</span>
+          </a>
         </div>
 
         <div class="row middle-xs between-xs last-xs retoure-a-la-boutique btn-contain">
-          <div class="col-xs-8 no-padding btn-1">
-            <a href="/"><span>Back to webstore</span></a>
-          </div>
-          <div class="col-xs-3 end-xs btn-2">
-            <a href="/"><span><</span></a>
-          </div>
+          <a href="/" class="col-xs-8 no-padding btn-1">
+            <span>Back to webstore</span>
+          </a>
+          <a href="/" class="col-xs-3 end-xs btn-2">
+            <span><</span>
+          </a>
         </div>
 
     </form>
@@ -261,6 +281,23 @@
     </script>
   {% endunless %}
 </div>
+
+<script>
+$(document).ready(function() {
+//Get and Set quantity
+var currentQuantity = 0;
+$.getJSON('/cart.js', function(cart) {
+    currentQuantity = cart.items.reduce((total, amount) => {
+        if (amount.product_title == {{product.title | json}}) {
+          total += amount.quantity;
+        }
+      return total
+    }, 0);
+    $('.quantity.cart-count').text(currentQuantity);
+  });
+  $('.quantity.cart-count').text(currentQuantity);
+});
+</script>
 
 {% schema %}
   {

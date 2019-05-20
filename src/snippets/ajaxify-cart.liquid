@@ -24,13 +24,14 @@ Shopify.AjaxifyCart = (function($) {
     addedToCartBtnLabel:           'Thank you!',
     addingToCartBtnLabel:          'Adding...',
     soldOutBtnLabel:               'Sold Out',
-    howLongTillBtnReturnsToNormal: 1000, // in milliseconds.
+    howLongTillBtnReturnsToNormal: 3000, // in milliseconds.
     cartCountSelector:             '.cart-count, #cart-count a:first, #gocart p a, #cart .checkout em, .item-count',
     cartTotalSelector:             '#cart-price',
     // 'aboveForm' for top of add to cart form,
     // 'belowForm' for below the add to cart form, and
     // 'nextButton' for next to add to cart button.
     feedbackPosition:              'nextButton',
+    secondaryButton:               'btn-2',
 
     // What you will never need to change
     addToCartBtnSelector:          '[type="submit"]',
@@ -72,13 +73,35 @@ Shopify.AjaxifyCart = (function($) {
       $button.val(label).text(label);
     }
   };
+  var _setTextCheckout = function($button, label, type) {
+    if ($button.children().length) {
+      $button.children().children().each(function() {
+          if ($.trim($(this).text()) !== '' && !$(this).hasClass(_config.secondaryButton)) {
+            switch (type) {
+              case 'success':
+                $(this).parent().addClass('success');
+                break;
+              case 'error':
+                $(this).parent().addClass('error');
+                break;
+                default:
+                $(this).parent().removeClass('error success');
+            };
+            $(this).text(label);
+          }
+      });
+    }
+    else {
+      $button.val(label).text(label);
+    }
+  };
   var _init = function() {
     $(document).ready(function() {
       $(_config.addToCartFormSelector).submit(function(e) {
         e.preventDefault();
         var $addToCartForm = $(this);
         var $addToCartBtn = $addToCartForm.find(_config.addToCartBtnSelector);
-        _setText($addToCartBtn, _config.addingToCartBtnLabel);
+        _setTextCheckout($addToCartBtn, _config.addingToCartBtnLabel);
         $addToCartBtn.addClass('disabled').prop('disabled', true);
         // Add to cart.
         $.ajax({
@@ -89,11 +112,12 @@ Shopify.AjaxifyCart = (function($) {
           success: function(itemData) {
             // Re-enable add to cart button.
             $addToCartBtn.addClass('inverted');
-            _setText($addToCartBtn, _config.addedToCartBtnLabel);
+            _setTextCheckout($addToCartBtn, _config.addedToCartBtnLabel, 'success');
             _showFeedback('success','<i class="fa fa-check"></i> Added to cart! <a href="/cart">View cart</a> or <a href="/collections/all">continue shopping</a>.',$addToCartForm);
             window.setTimeout(function(){
               $addToCartBtn.prop('disabled', false).removeClass('disabled').removeClass('inverted');
-              _setText($addToCartBtn,_config.addToCartBtnLabel);
+              _setTextCheckout($addToCartBtn,_config.addToCartBtnLabel);
+              _showFeedback('success', '', $addToCartForm);
             }, _config.howLongTillBtnReturnsToNormal);
             // Update cart count and show cart link.
             $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
@@ -127,15 +151,27 @@ Shopify.AjaxifyCart = (function($) {
             var response = eval('(' + XMLHttpRequest.responseText + ')');
             response = response.description;
             if (response.slice(0,4) === 'All ') {
-              _showFeedback('error', response.replace('All 1 ', 'All '), $addToCartForm);
               $addToCartBtn.prop('disabled', false);
-              _setText($addToCartBtn, _config.soldOutBtnLabel);
+              _setTextCheckout($addToCartBtn, response.replace('All 1 ', 'All '), 'error');
               $addToCartBtn.prop('disabled',true);
+
+              // Re-enable add to cart button.
+              $addToCartBtn.addClass('inverted');
+              window.setTimeout(function(){
+                $addToCartBtn.prop('disabled', false).removeClass('disabled').removeClass('inverted');
+                _setTextCheckout($addToCartBtn,_config.addToCartBtnLabel);
+                _showFeedback('error', '', $addToCartForm);
+              }, _config.howLongTillBtnReturnsToNormal);
             }
             else {
-              _showFeedback('error', '<i class="fa fa-warning"></i> ' + response, $addToCartForm);
               $addToCartBtn.prop('disabled', false).removeClass('disabled');
-              _setText($addToCartBtn, _config.addToCartBtnLabel);
+                _setTextCheckout($addToCartBtn, _config.soldOutBtnLabel, 'error');
+
+                window.setTimeout(function(){
+                  $addToCartBtn.prop('disabled', false).removeClass('disabled').removeClass('inverted');
+                  _setTextCheckout($addToCartBtn,_config.addToCartBtnLabel);
+                  _showFeedback('error', '', $addToCartForm);
+                }, _config.howLongTillBtnReturnsToNormal);
             }
           }
         });

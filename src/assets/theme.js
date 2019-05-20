@@ -355,7 +355,6 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
 
   register: function(type, constructor) {
     this.constructors[type] = constructor;
-
     $('[data-section-type=' + type + ']').each(function(index, container) {
       this._createInstance(container, constructor);
     }.bind(this));
@@ -785,6 +784,7 @@ theme.Product = (function() {
      * @param {string} text - Updates the text notification content of the cart
      */
     updateAddToCartState: function(evt) {
+      console.log('updateAddToCartState');
       var variant = evt.variant;
 
       if (variant) {
