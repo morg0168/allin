@@ -97,6 +97,7 @@ Shopify.AjaxifyCart = (function($) {
   };
   var _init = function() {
     $(document).ready(function() {
+
       $(_config.addToCartFormSelector).submit(function(e) {
         e.preventDefault();
         var $addToCartForm = $(this);
@@ -145,6 +146,14 @@ Shopify.AjaxifyCart = (function($) {
                   $(_config.cartTotalSelector).html(Shopify.formatMoney(cart.total_price, "{{ shop.money_format | remove: "'" | remove: '"' }}"));
                 }
               };
+              //Set quantity on product page
+              var currentQuantity = cart.items.reduce((total, amount) => {
+                    if (amount.product_title == "{{product.title}}") {
+                      total += amount.quantity;
+                    }
+                  return total
+                }, 0);
+                $('.product-item-container .quantity').text(currentQuantity);        
             });
           },
           error: function(XMLHttpRequest) {

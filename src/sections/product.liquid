@@ -221,7 +221,7 @@
             </label>
           </div>
           <div class="col-xs-3 end-xs btn-2">
-            <span class="quantity cart-count"></span>
+            <span class="quantity"></span>
             <!-- <select class="quantity" type="number" id="Quantity" name="quantity" value="1" min="1">
               {% for quantity in product.selected_variant %}
               <option value="{{ quantity }}">
@@ -293,9 +293,9 @@ $.getJSON('/cart.js', function(cart) {
         }
       return total
     }, 0);
-    $('.quantity.cart-count').text(currentQuantity);
+    $('.product-item-container .quantity').text(currentQuantity);
   });
-  $('.quantity.cart-count').text(currentQuantity);
+  $('.product-item-container .quantity').text(currentQuantity);
 });
 </script>
 
