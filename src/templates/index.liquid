@@ -2,7 +2,7 @@
 <div class="modal show-modal">
      <div class="modal-content">
        <div class="row middle-xs center-xs inner">
-         <img src="{{ 'logo.png' | asset_url }}"
+         <img src="{{ 'logo.svg' | asset_url }}"
               alt="{{ shop.name }}"
               itemprop="logo">
               <div class="select-currency">
@@ -59,12 +59,12 @@
 
   function toggleCookie() {
       var x = getCookie('firstVisit');
-      if (!x) {
-        $modalContent.classList.add("show-modal-content");
-        setCookie('firstVisit','firstVisit', 7);
-      } else {
+      // if (!x) {
+      //   $modalContent.classList.add("show-modal-content");
+      //   setCookie('firstVisit','firstVisit', 7);
+      // } else {
         closeModal();
-      }
+      //}
       var $cookieCurrency = Currency.cookie.read();
       var $correspondingRadio = '[value=' + $cookieCurrency + ']';
       $('.select-currency').find('[name=modal-radio]').removeClass('active');

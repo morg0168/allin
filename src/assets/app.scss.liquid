@@ -538,28 +538,48 @@ ul {
    a {
      color:greenyellow;
      position:absolute;
-     font-size:1.8rem;
+     font-size:1.4rem;
      font-weight:100;
+     text-align: left;
+     &::after {
+       opacity:0;
+       content: "Voir ce produit";
+       color: greenyellow;
+       font-size: 0.8rem;
+       line-height: 1rem;
+       display: block;
+       border-bottom: 1px solid greenyellow;
+     }
+     &:hover {
+        &::after {
+          opacity:1;
+        }
+     }
      &.link1 {
        top: 20%;
-       right:32%;
+       right:28%;
        text-align:left;
-       &::after {
-         content: "Voir ce produit";
-         color: greenyellow;
-         font-size: 0.8rem;
-         line-height: 1rem;
-         display: block;
-         border-bottom: 1px solid greenyellow;
-       }
      }
      &.link2 {
-       top:40%;
-       right:30%;
+       top:26%;
+       right:24%;
      }
      &.link3 {
-       top:55%;
-       right:40%;
+       top:40%;
+       right:18%;
+     }
+     &.link4 {
+       top:61%;
+       right:25%;
+     }
+     &.link5 {
+       top:83%;
+       right:30%;
+     }
+     &:first-of-type {
+       &::after {
+         opacity:1;
+       }
      }
    }
   .lookbook-img-contain {
@@ -679,7 +699,6 @@ ul {
       -ms-transform: scale(2,2);
       -webkit-transform: scale(2,2);
       -o-transform: scale(2,2);
-      margin:1rem 0;
     }
     .radio-label::after {
       opacity: 1;
@@ -694,7 +713,6 @@ ul {
       width: 16px;
       border-radius: 50%;
       cursor:pointer;
-      margin:1rem 0;
     }
     .unavailable.radio-label::after {
       background: red;
@@ -747,6 +765,9 @@ ul {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+  }
+  .checkout-contain {
+    margin-top:0;
   }
   .checkout {
     background: #BCBEC0;
@@ -1114,6 +1135,7 @@ ul {
          margin: 15px auto 70px auto;
         }
     }
+
 }
 
 .btn-1 {
