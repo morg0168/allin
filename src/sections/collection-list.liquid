@@ -7,7 +7,7 @@
 
       {% if product.featured_image != blank %}
       <a href="{{ product.url | within: collection }}" class="product-img-link">
-        <div style="background: url('{{  product.featured_image.src | img_url }}');" alt="{{ image.alt | escape }}" class="collection-list-img-contain" ></div>
+        <div style="background: url('{{  product.featured_image.src | img_url: '1000x' }}');" alt="{{ image.alt | escape }}" class="collection-list-img-contain" ></div>
       </a>
       {% endif %}
       {% if product.available %}

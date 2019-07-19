@@ -25,7 +25,7 @@
 
       <div class="slick-slider">
           {% for image in product.images %}
-        <div style="background: url('{{ image.src | img_url }}');" alt="{{ image.alt | escape }}" class="product-image" data-product-single-thumbnail></div>
+        <div style="background: url('{{ image.src | img_url: '1000x' }}');" alt="{{ image.alt | escape }}" class="product-image" data-product-single-thumbnail></div>
         {% endfor %}
       </div>
 
