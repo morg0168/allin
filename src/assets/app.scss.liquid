@@ -438,16 +438,6 @@ ul {
   width:100%;
 }
 
-.cart-text-contain {
-    //padding: 0.5rem 5px 0.5rem 5px;
-    // &.out {
-    //   background-color:red;
-    // }
-    // .col:first-of-type {
-    //   padding-left:5px;
-    // }
-}
-
 .currency-picker__wrapper {
   display:block;
   margin-top:25px;
@@ -502,18 +492,6 @@ ul {
      }
      p {
        margin:0;
-     }
-     .go-to-product {
-       background-color: white;
-       border: 1px solid black;
-       text-align: right;
-       margin: 0 auto;
-       width: 46px;
-       padding: 1rem 5px 1rem 5px;
-       display: inline-block;
-       span {
-         display: block;
-       }
      }
    }
  }
@@ -814,6 +792,65 @@ ul {
         &:after {
           content: "<div>TEST<div>";
       }
+    }
+  }
+
+  /**
+   * Cart Page
+   */
+.cart-page-container {
+  form {
+    img {
+      max-width:112px;
+    }
+    .cart-product-information {
+      .remove {
+        text-decoration: underline;
+      }
+      margin:10% auto;
+      p {
+      //  margin:0;
+      }
+    }
+    .cart-information-contain {
+      max-width:278px;
+      .subtotal {
+        text-transform: uppercase;
+      }
+      .btn-1 {
+        margin-left:0;
+        margin-right:0;
+        margin-top:1rem;
+      }
+    }
+  }
+}
+
+/**
+   * General
+   */
+
+  .go-to-product {
+    background-color: white;
+    border: 1px solid black;
+    text-align: right;
+    margin: 0 auto;
+    width: 46px;
+    padding: 1rem 5px 1rem 5px;
+    display: inline-block;
+    input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-position: right center;
+      background-image: url(//cdn.shopify.com/s/files/1/0027/4494/2651/t/2/assets/arrow-down.svg?7149);
+      background-repeat: no-repeat;
+      background-color: transparent;
+      background-size: 25%;
+      background-position: 90%;
+      text-indent: 0.01px;
+      text-overflow: '';
+      cursor: pointer;
     }
   }
 
