@@ -624,7 +624,7 @@ ul {
        border: 1px solid black;
        overflow: scroll;
        padding: 20px;
-       margin: 25px auto;
+       margin:0.5rem 0;
        p {
          margin:0;
        }
@@ -734,6 +734,9 @@ ul {
         }
       }
     }
+    .select-your-size {
+      margin: 0 0 2rem 0;
+    }
   }
   .size-selects .col {
     margin:0 auto;
@@ -754,9 +757,9 @@ ul {
   }
   .checkout {
     background: #BCBEC0;
-    border: none;
+    border: 1px solid #BCBEC0;
+    padding: 5px 0;
     margin:0 auto;
-    padding:0.5rem 0;
   }
 }
 
@@ -818,9 +821,22 @@ ul {
         text-transform: uppercase;
       }
       .btn-1 {
+        position: relative;
+        padding: 0;
         margin-left:0;
         margin-right:0;
         margin-top:1rem;
+        input {
+          width: 100%;
+          text-align: left;
+          padding: 1rem;
+          background: white;
+        }
+        span {
+          position: absolute;
+          right: 1rem;
+          pointer-events: none;
+        }
       }
     }
   }
@@ -839,6 +855,7 @@ ul {
     padding: 1rem 5px 1rem 5px;
     display: inline-block;
     input {
+      border:none;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
@@ -852,6 +869,11 @@ ul {
       text-overflow: '';
       cursor: pointer;
     }
+  }
+
+  // button, input[type="submit"], label[for] {
+  .size-selects .radio-label {
+    margin-left: 4px;
   }
 
   /**
@@ -979,6 +1001,11 @@ ul {
             width: 414px!important;
             height: 414px!important;
           }
+        }
+      }
+      form {
+        .rte {
+          margin: 25px auto;
         }
       }
     }
@@ -1182,14 +1209,14 @@ ul {
 
 .btn-1 {
   border:1px solid black;
-  padding:3px 10px;
+  padding:5px 10px;
   //margin-right:20px;
   text-align: left;
 }
 
 .btn-2 {
   border:1px solid black;
-  padding:3px 10px;
+  padding:5px 10px;
   //margin-right:20px;
   text-align: center;
 }

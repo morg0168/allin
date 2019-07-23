@@ -49,9 +49,28 @@
                 </div>
                 <div><p>{{ 'cart.label.quantity' | t }}</p></div>
                 <div class="row middle-xs">
-                <div data-label="{{ 'cart.label.quantity' | t }}" class="col-xs-2">
+                <div data-label="{{ 'cart.label.quantity' | t }}" class="col-xs-6 col-sm-2">
 
                   <div class="go-to-product">
+                    {% comment %}
+                    <select name="updatesClone[]" id="updates_{{ item.key }}" min="0">
+                      {% assign codes = '1,2,3,4,5,6,7,8,9,10' | split: ',' %}
+                        {% for code in codes %}
+                        {% assign codeNumber = code | plus: 0 %}
+                          {% if codeNumber == item.quantity %}
+                            {% assign selected = true %}
+                            {% else %}
+                            {% assign selected = false %}
+                          {% endif %}
+                          {% if selected == true %}
+                            {% assign selectedString = 'selected' %}
+                          {% else %}
+                            {% assign selectedString = '' %}
+                          {% endif %}
+                            <option {{ selectedString }} value="{{code}}" >{{ code }}</option>
+                        {% endfor %}
+                    </select>
+                  {% endcomment %}
                   <input type="number"
                          name="updates[]"
                          id="updates_{{ item.key }}"
@@ -60,8 +79,22 @@
                          aria-label="{{ 'cart.general.item_quantity' | t }}">
                   </div>
 
+                  <script>
+                  // Bind input and select for changing quantities
+                  //TODO:: Probably should find a better way of doing thisss
+                    // $(document).ready(function () {
+                    //   let $selectedValue = $('select[name="updatesClone[]"]').val();
+                    //   console.log($selectedValue);
+                    // });
+                    $('select[name="updatesClone[]"]').change(function() {
+                      let selectedCloneValue = $(this)[0].value;
+                      let realInput = $
+                      console.log($('selected[name="updates[]"]'));
+                    });
+                  </script>
+
                 </div>
-                <div class="col-xs-10">
+                <div class="col-xs-6 col-sm-10">
                   <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="remove">
                     <small>{{ 'cart.general.remove' | t }}</small>
                   </a>
@@ -75,7 +108,7 @@
       <p class="subtotal">{{ 'cart.general.subtotal' | t }}: {{ cart.total_price | money }}</p>
 
       <div class="row middle-xs between-xs last-xs btn-1">
-        <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
+        <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}">
         <span>></span>
       </div>
       <div class="row middle-xs between-xs last-xs btn-1">
