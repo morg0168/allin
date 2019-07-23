@@ -14,7 +14,7 @@
           {% endif %}
           {% if product.available %}
           <div class="product-information available row">
-            <div class="col-xs-6 no-padding">
+            <div class="col-xs-6 col-md-8 no-padding">
             <p>
               {% if product.compare_at_price > product.price %}
 
@@ -82,7 +82,7 @@
 
             </div>
 
-          <div class="col-xs-6 no-padding end-xs">
+          <div class="col-xs-6 col-md-4 no-padding end-xs">
             <a href="{{ product.url | within: collection }}" class="go-to-product"><span>></span></a>
           </div>
 
