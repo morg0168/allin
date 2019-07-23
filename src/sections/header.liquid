@@ -121,7 +121,9 @@
           </li>
         {% endif %}
       {% endfor %}
+      {% comment %}
       {% include 'currency-picker' %}
+      {% endcomment %}
       <a href="/cart" class="cart-count">
         {{ 'layout.cart.title' | t }}
         ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
