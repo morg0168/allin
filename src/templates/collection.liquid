@@ -1,5 +1,5 @@
 
-<div class="row middle-xs product-itemlist-container" >
+<div class="row middle-xs product-itemlist-container collection" >
   {% for product in collection.products %}
   <div class="col-xs-12 col-sm-6 center-xs">
 
@@ -96,32 +96,3 @@
   </div>
   {% endfor %}
 </div>
-
-
-
-
-{% schema %}
-  {
-    "name": "Featured collection",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Heading",
-        "default": "Featured collection"
-      },
-      {
-        "id": "collection",
-        "type": "collection",
-        "label": "Collection"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Featured collection",
-        "category": "Collection"
-      }
-    ]
-  }
-
-{% endschema %}
