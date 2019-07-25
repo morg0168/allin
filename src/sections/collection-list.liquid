@@ -1,9 +1,8 @@
 <!-- Manually sort categories-->
 {% assign titles = "shoes, hoodie, t-shirts, long-sleeve, pants, w-jacket, accessories" | split: ", " %}
-
+<div class="collection">
 {% for title in titles %}
-
-<div class="row middle-xs product-itemlist-container" >
+  <div class="row middle-xs product-itemlist-container" >
   {% for product in collections[title].products %}
   <div class="col-xs-12 col-sm-6 center-xs">
 
@@ -100,9 +99,8 @@
   </div>
   {% endfor %}
 </div>
-
 {% endfor %}
-
+</div>
 
 {% schema %}
   {
