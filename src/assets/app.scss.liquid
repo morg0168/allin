@@ -471,6 +471,9 @@ ul {
       background-size: cover!important;
       background-repeat: no-repeat!important;
       background-position: center!important;
+      &.pants, &.w-jacket {
+        height:420px;
+      }
     }
   }
    img {
@@ -648,6 +651,17 @@ ul {
        background-position: center!important;
        width: 314px!important;
        height: 314px!important;
+     }
+   }
+   &.pants, &.w-jacket {
+     .slick-slider {
+       height:420px;
+       .slick-slide {
+         height:420px;
+       }
+       .product-image {
+         height: 420px!important;
+       }
      }
    }
     img {

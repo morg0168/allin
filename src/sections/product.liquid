@@ -10,7 +10,10 @@
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
 
-<div class="row middle-xs center-xs product-item-container">
+  {% for collection in product.collections %}
+    {% assign collectionHandle = collection.handle %}
+  {% endfor %}
+<div class="row middle-xs center-xs product-item-container {{ collection.handle }} {{ collectionHandle }}">
   <div class="col-xs-6 col-sm-8 mobile-only title">
     <p>{{ product.title }}</p>
   </div>
