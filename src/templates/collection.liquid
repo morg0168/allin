@@ -1,109 +1,127 @@
-{% paginate collection.products by 12 %}
 
-  <div class="{{ template | handleize }}">
-    <div class="row middle-xs product-itemlist-container" id="{{ template }}-{{ collection.title | handleize }}">
-    <!-- Copy of collection-list.liquid  -->
-      {% for product in collection.products %}
-      <div class="col-xs-12 col-sm-6 center-xs">
+<div class="row middle-xs product-itemlist-container" >
+  {% for product in collection.products %}
+  <div class="col-xs-12 col-sm-6 center-xs">
 
 
-          {% if product.featured_image != blank %}
-          <a href="{{ product.url | within: collection }}" class="product-img-link">
-            <div style="background: url('{{  product.featured_image.src | img_url: '1000x' }}');" alt="{{ image.alt | escape }}" class="collection-list-img-contain" ></div>
-          </a>
-          {% endif %}
-          {% if product.available %}
-          <div class="product-information available row">
-            <div class="col-xs-6 col-md-8 no-padding">
-            <p>
-              {% if product.compare_at_price > product.price %}
+      {% if product.featured_image != blank %}
+      <a href="{{ product.url | within: collection }}" class="product-img-link">
+        <div style="background: url('{{  product.featured_image.src | img_url: '1000x' }}');" alt="{{ image.alt | escape }}" class="collection-list-img-contain" ></div>
+      </a>
+      {% endif %}
+      {% if product.available %}
+      <div class="product-information available row">
+        <div class="col-xs-6 no-padding">
+        <p>
+          {% if product.compare_at_price > product.price %}
 
-                {% if product.price_varies %}
-                  {%- assign sale_price = product.price | money -%}
-                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                {% else %}
-                  {{ 'products.product.on_sale' | t }}
-                  {{ product.price | money }}
-                {% endif %}
-              {% else %}
-                {% if product.price_varies %}
-                  {%- assign price = product.price | money -%}
-                  {{ 'products.product.from_text_html' | t: price: price }}
-                {% else %}
-                  {{ product.price | money }}
-                {% endif %}
-              {% endif %}
-            </p>
-
-            <p>{{ product.title }}</p>
-
-            <p>
-              {% assign search_option = "Size" %}
-              {% assign delimiter = "|" %}
-              {% assign option_index = "" %}
-              {% assign option_value = "" %}
-              {% assign option_array = "" %}
-
-              {% for option_title in product.options %}
-                {% if option_title == search_option %}
-                  {% assign option_index = forloop.index0 %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-
-              {% for variant in product.variants %}
-                {% if variant.available %}
-                  {% case option_index %}
-                  {% when 0 %}
-                    {% assign option_value = variant.option1 | append: delimiter %}
-                  {% when 1 %}
-                    {% assign option_value = variant.option2 | append: delimiter %}
-                  {% when 2 %}
-                    {% assign option_value = variant.option3 | append: delimiter %}
-                  {% endcase %}
-                  {% unless option_array contains option_value %}
-                    {% assign option_array = option_array | append: option_value %}
-                  {% endunless %}
-                {% endif %}
-              {% endfor %}
-
-              {% assign option_array = option_array | split: delimiter %}
-
-              {% if option_array.size > 0 %}
-                <p>Available {{ search_option }}
-                <span>
-                  {% for value in option_array %}
-                  <span>{{ value }}</span>
-                  {% endfor %}
-                </span>
-                </p>
-                {% endif %}
-              </p>
-
-            </div>
-
-          <div class="col-xs-6 col-md-4 no-padding end-xs">
-            <a href="{{ product.url | within: collection }}" class="go-to-product"><span>></span></a>
-          </div>
-
-          </div>
+            {% if product.price_varies %}
+              {%- assign sale_price = product.price | money -%}
+              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+            {% else %}
+              {{ 'products.product.on_sale' | t }}
+              {{ product.price | money }}
+            {% endif %}
           {% else %}
-          <a href="{{ product.url | within: collection }}">
-            <div class="product-information unavailable row middle-xs between-xs">
-              <p class="col-xs-10 no-padding">{{ 'products.product.sold_out' | t }}</p>
-              <p class="col-xs-2 no-padding end-xs">></p>
-            </div>
-          </a>
+            {% if product.price_varies %}
+              {%- assign price = product.price | money -%}
+              {{ 'products.product.from_text_html' | t: price: price }}
+            {% else %}
+              {{ product.price | money }}
+            {% endif %}
           {% endif %}
+        </p>
 
+        <p>{{ product.title }}</p>
+
+        <p>
+          {% assign search_option = "Size" %}
+          {% assign delimiter = "|" %}
+          {% assign option_index = "" %}
+          {% assign option_value = "" %}
+          {% assign option_array = "" %}
+
+          {% for option_title in product.options %}
+            {% if option_title == search_option %}
+              {% assign option_index = forloop.index0 %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% for variant in product.variants %}
+            {% if variant.available %}
+              {% case option_index %}
+              {% when 0 %}
+                {% assign option_value = variant.option1 | append: delimiter %}
+              {% when 1 %}
+                {% assign option_value = variant.option2 | append: delimiter %}
+              {% when 2 %}
+                {% assign option_value = variant.option3 | append: delimiter %}
+              {% endcase %}
+              {% unless option_array contains option_value %}
+                {% assign option_array = option_array | append: option_value %}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign option_array = option_array | split: delimiter %}
+
+          {% if option_array.size > 0 %}
+            <p>Available {{ search_option }}
+            <span>
+              {% for value in option_array %}
+              <span>{{ value }}</span>
+              {% endfor %}
+            </span>
+            </p>
+            {% endif %}
+          </p>
+
+        </div>
+
+      <div class="col-xs-6 no-padding end-xs">
+        <a href="{{ product.url | within: collection }}" class="go-to-product"><span>></span></a>
       </div>
 
-        {% endfor %}
+      </div>
+      {% else %}
+      <a href="{{ product.url | within: collection }}">
+        <div class="product-information unavailable row middle-xs between-xs">
+          <p class="col-xs-10 no-padding">{{ 'products.product.sold_out' | t }}</p>
+          <p class="col-xs-2 no-padding end-xs">></p>
+        </div>
+      </a>
+      {% endif %}
 
-    </div>
+  </div>
+  {% endfor %}
 </div>
 
-  {% if paginate.pages > 1 %}
-    {% include 'pagination' %}
-  {% endif %}
-{% endpaginate %}
+
+
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}
