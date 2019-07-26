@@ -258,6 +258,19 @@
             {% comment %}
             this is for shoes, make another page for different category size charts
             {% endcomment %}
+            {% case collectionHandle %}
+              {% when 'w-jacket' %}
+                {{ pages.winter-jacket.content }}
+                {% when 't-shirts' %}
+                {{ pages.t-shirt.content }}
+                {% when 'pants' %}
+                {{ pages.pants.content }}
+                {% when 'hoodie' %}
+                {{ pages.hoodie.content }}
+                {% when 'accessories' %}
+                {{ pages.hat.content }}
+              {% else %}
+            {% endcase %}
             {{ pages.size-chart-1.content }}
           </div>
           <a href="#size-chart" class=" size-chart-open-popup col-xs-3 end-xs btn-2">
