@@ -467,13 +467,13 @@ ul {
     .collection-list-img-contain {
       margin:0 auto;
       width: 267px;
-      height: 420px;
+      height: 267px;
       background-size: cover!important;
       background-repeat: no-repeat!important;
       background-position: center!important;
-      // &.pants, &.w-jacket {
-      //   height:420px;
-      // }
+      &.pants, &.w-jacket {
+        height:420px;
+      }
     }
   }
    img {
@@ -637,11 +637,11 @@ ul {
    .slick-slider {
      display: none;
      width:314px;
-     height:420px;
+     height:314px;
      margin:0 auto;
      .slick-slide {
        width:314px;
-       height:420px;
+       height:314px;
      }
      .product-image {
        background-size: cover!important;
@@ -650,20 +650,20 @@ ul {
        position: relative;
        background-position: center!important;
        width: 314px!important;
-       height: 420px!important;
+       height: 314px!important;
      }
    }
-   // &.pants, &.w-jacket {
-   //   .slick-slider {
-   //     height:420px;
-   //     .slick-slide {
-   //       height:420px;
-   //     }
-   //     .product-image {
-   //       height: 420px!important;
-   //     }
-   //   }
-   // }
+   &.pants, &.w-jacket {
+     .slick-slider {
+       height:485px;
+       .slick-slide {
+         height:485px;
+       }
+       .product-image {
+         height: 485px!important;
+       }
+     }
+   }
     img {
       max-width:300px;
     }
@@ -1011,14 +1011,28 @@ ul {
       .product-item-container {
         .slick-slider {
           width:414px;
-          height:475px;
+          height:414px;
           .slick-slide {
             width:414px;
-            height:475px;
+            height:414px;
           }
           .product-image {
             width: 414px!important;
-            height: 475px!important;
+            height: 414px!important;
+          }
+        }
+        &.pants, &.w-jacket {
+          .slick-slider {
+            width:345px;
+            height:515px;
+            .slick-slide {
+              width:345px;
+              height:515px;
+            }
+            .product-image {
+              width:345px!important;
+              height: 515px!important;
+            }
           }
         }
       }
