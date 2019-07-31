@@ -111,9 +111,10 @@
         <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}">
         <span>></span>
       </div>
-      <div class="row middle-xs between-xs last-xs btn-1">
+      <div class="row middle-xs between-xs last-xs btn-1 update-cart">
         <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
-        <span>></span>
+        <span><img src="{{ 'loop.svg' | asset_url }}"
+              alt="loop"></span>
       </div>
 
     {% if cart.total_discounts > 0 %}

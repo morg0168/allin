@@ -655,12 +655,12 @@ ul {
    }
    &.pants, &.w-jacket {
      .slick-slider {
-       height:485px;
+       height:600px;
        .slick-slide {
-         height:485px;
+         height:600px;
        }
        .product-image {
-         height: 485px!important;
+         height: 600px!important;
        }
      }
    }
@@ -1190,7 +1190,7 @@ ul {
       display: block;
       width: 100%;
       background: white;
-      z-index:9;
+      z-index:99;
 
       h1 {
         margin:0;
@@ -1254,6 +1254,36 @@ ul {
       .product-information {
          margin: 15px auto 70px auto;
         }
+    }
+
+    .template-product {
+      .slick-slider-contain {
+        padding:0;
+      }
+      .product-item-container {
+        .slick-slider {
+          display: none;
+          width:100vw;
+          height:100vw;
+          margin:0 auto;
+          .slick-slide {
+            width:100vw;
+            height:100vw;
+          }
+          .product-image {
+            width: 100vw!important;
+            height: 100vw!important;
+          }
+        }
+        .slick-prev {
+          left:0;
+          z-index:9;
+        }
+        .slick-next {
+          right:0;
+          z-index:9;
+        }
+      }
     }
 
 }
