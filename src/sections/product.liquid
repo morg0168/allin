@@ -247,7 +247,7 @@
     </div>
 
       {% assign handle = product.handle %}
-      {% if pages.collectionHandle.content != "" %}
+      {% if pages[collectionHandle].content != "" %}
       <div class="row middle-xs between-xs btn-contain last-xs">
           <a href="#size-chart" class=" size-chart-open-popup col-xs-8 start-xs btn-1">
             <span>See size chart</span>
@@ -256,10 +256,10 @@
             {% comment %}
             this is for shoes, make another page for different category size charts
             {% endcomment %}
-            {% if pages.handle.content != "" %}
-              {{ pages.handle.content }}
+            {% if pages[handle].content != "" %}
+              {{ pages[handle].content }}
             {% else %}
-              {{ pages.collectionHandle.content }}
+              {{ pages[collectionHandle].content }}
             {% endif %}
           </div>
           <a href="#size-chart" class=" size-chart-open-popup col-xs-3 end-xs btn-2">
