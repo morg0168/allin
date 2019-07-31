@@ -247,7 +247,7 @@
     </div>
 
       {% assign handle = product.handle %}
-      {% if pages[collectionHandle].content != "" %}
+      {% if pages[collectionHandle].content != "" or pages[handle].content != "" %}
       <div class="row middle-xs between-xs btn-contain last-xs">
           <a href="#size-chart" class=" size-chart-open-popup col-xs-8 start-xs btn-1">
             <span>See size chart</span>
