@@ -122,9 +122,9 @@
                     {% else %}
                     {% assign availbilityStatus = ' unavailable ' %}
                   {% endif %}
-                <div class="col col-xs-1">
+                <div class="col col-xs-1 middle-xs row">
                   <label for="{{ variant.title | escape }}" class="radio-label {{ availbilityStatus }}">
-                    {{ variant.title }}
+                    <span>{{ variant.title }}</span>
                   </label>
                   <input type="radio" value="{{ variant.title | escape }}"  name="radio" class="radio-label {{ availbilityStatus }}"
                   {% if variant == current_variant %}selected="selected"{% endif %}

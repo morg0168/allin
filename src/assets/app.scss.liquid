@@ -704,6 +704,14 @@ ul {
       -ms-transform: scale(2,2);
       -webkit-transform: scale(2,2);
       -o-transform: scale(2,2);
+      position: absolute;
+    }
+    .radio-label {
+      text-align: center;
+      margin: 0 auto;
+      > span {
+        white-space: nowrap;
+      }
     }
     .radio-label::after {
       opacity: 1;
@@ -713,11 +721,12 @@ ul {
       display: block;
       border: 1px solid #444;
       height: 16px;
-      position: absolute;
+      // position: absolute;
       vertical-align: middle;
       width: 16px;
       border-radius: 50%;
       cursor:pointer;
+      margin: 0 auto;
     }
     .unavailable.radio-label::after {
       background: red;
