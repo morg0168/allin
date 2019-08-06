@@ -51,95 +51,97 @@
 </div>
 <!-- <div id="navbar" class="overlay"> -->
 <div data-section-id="{{ section.id }}" data-section-type="header-section" id="main-header" class="overlay main-header">
-  <header role="banner" class="desktop-only">
-    {% if template.name == 'index' %}
-      <h1 itemscope itemtype="http://schema.org/Organization">
-    {% else %}
-      <div class="h1" itemscope itemtype="http://schema.org/Organization">
-    {% endif %}
-        <a href="/" itemprop="url" class="site-logo site-header__logo-image">
+  <div class="header-contain">
+    <header role="banner" class="desktop-only">
+      {% if template.name == 'index' %}
+        <h1 itemscope itemtype="http://schema.org/Organization">
+      {% else %}
+        <div class="h1" itemscope itemtype="http://schema.org/Organization">
+      {% endif %}
+          <a href="/" itemprop="url" class="site-logo site-header__logo-image">
 
-            <img src="{{ 'logo.svg' | asset_url }}"
-                 alt="{{ shop.name }}"
-                 itemprop="logo">
-        </a>
-    {% if template.name == 'index' %}
-      </h1>
-    {% else %}
-      </div>
-    {% endif %}
+              <img src="{{ 'logo.svg' | asset_url }}"
+                   alt="{{ shop.name }}"
+                   itemprop="logo">
+          </a>
+      {% if template.name == 'index' %}
+        </h1>
+      {% else %}
+        </div>
+      {% endif %}
 
-    {% if shop.customer_accounts_enabled %}
-      <ul>
-        {% if customer %}
-          <li>
-            {% if customer.first_name != blank %}
-              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-            {% else %}
-              <a href="/account">{{ 'layout.customer.account' | t }}</a>
-            {% endif %}
-          </li>
-          <li>
-            {{ 'layout.customer.log_out' | t | customer_logout_link }}
-          </li>
-        {% else %}
-          <li>
-            {{ 'layout.customer.log_in' | t | customer_login_link }}
-          </li>
-          <li>
-            {{ 'layout.customer.create_account' | t | customer_register_link }}
-          </li>
-        {% endif %}
-      </ul>
-    {% endif %}
+      {% if shop.customer_accounts_enabled %}
+        <ul>
+          {% if customer %}
+            <li>
+              {% if customer.first_name != blank %}
+                {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+              {% else %}
+                <a href="/account">{{ 'layout.customer.account' | t }}</a>
+              {% endif %}
+            </li>
+            <li>
+              {{ 'layout.customer.log_out' | t | customer_logout_link }}
+            </li>
+          {% else %}
+            <li>
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+            </li>
+            <li>
+              {{ 'layout.customer.create_account' | t | customer_register_link }}
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
 
-  </header>
+    </header>
 
-  <nav role="navigation">
-  <div class="toggle-close mobile-only" id="toggle-close">x</div>
-    <ul class="site-nav top">
-      {% for link in linklists[section.settings.main_linklist].links %}
-        {%- assign child_list_handle = link.title | handleize -%}
-        {% if menus[child_list_handle].links != blank %}
-          <li class="site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="site-nav__link">
-              {{ link.title }}
-              {% include 'icon-arrow-down' %}
-            </a>
-            <ul class="site-nav__submenu">
-              {% for childlink in menus[child_list_handle].links %}
-                <li {% if childlink.active %}class="site-nav--active"{% endif %}>
-                  <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </li>
-        {% else %}
-          <li {% if link.active %}class="site-nav--active"{% endif %}>
-            <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-      {% comment %}
-      {% include 'currency-picker' %}
-      {% endcomment %}
-      <a href="/cart" class="cart-count">
-        {{ 'layout.cart.title' | t }}
-        ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-      </a>
-    </ul>
-
-    {%- assign footer_linklist = section.settings.footer_linklist -%}
-    {% if linklists[footer_linklist].links.size > 0 %}
-      <ul class="site-nav bottom">
-        {% for link in linklists[footer_linklist].links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    <nav role="navigation">
+    <div class="toggle-close mobile-only" id="toggle-close">x</div>
+      <ul class="site-nav top">
+        {% for link in linklists[section.settings.main_linklist].links %}
+          {%- assign child_list_handle = link.title | handleize -%}
+          {% if menus[child_list_handle].links != blank %}
+            <li class="site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
+              <a href="{{ link.url }}" class="site-nav__link">
+                {{ link.title }}
+                {% include 'icon-arrow-down' %}
+              </a>
+              <ul class="site-nav__submenu">
+                {% for childlink in menus[child_list_handle].links %}
+                  <li {% if childlink.active %}class="site-nav--active"{% endif %}>
+                    <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li {% if link.active %}class="site-nav--active"{% endif %}>
+              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            </li>
+          {% endif %}
         {% endfor %}
+        {% comment %}
+        {% include 'currency-picker' %}
+        {% endcomment %}
+        <a href="/cart" class="cart-count">
+          {{ 'layout.cart.title' | t }}
+          ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+        </a>
       </ul>
-    {% endif %}
 
-  </nav>
+      {%- assign footer_linklist = section.settings.footer_linklist -%}
+      {% if linklists[footer_linklist].links.size > 0 %}
+        <ul class="site-nav bottom">
+          {% for link in linklists[footer_linklist].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+    </nav>
+  </div>
 </div>
 
 <div id="container" class="mobile-only">
