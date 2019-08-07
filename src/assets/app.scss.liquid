@@ -456,6 +456,7 @@ ul {
    margin-right: 1rem;
 }
 
+
 /**
  * Generic Collection Template
  */
@@ -464,10 +465,11 @@ ul {
   margin-right:0;
   .product-img-link {
     // display: inline-block;
+    display:block;
     .collection-list-img-contain {
       margin:0 auto;
       width: 267px;
-      height: 267px;
+      min-height: 267px;
       background-size: cover!important;
       background-repeat: no-repeat!important;
       background-position: center!important;
@@ -1102,6 +1104,38 @@ ul {
     body {
       margin-left:0;
     }
+    .product-itemlist-container {
+      margin-left:0;
+      margin-right:0;
+      > div {
+        padding-left:0;
+      }
+      .product-img-link {
+        // display: inline-block;
+        display:block;
+        .collection-list-img-contain {
+          margin:0 auto;
+          width: 100vw;
+          min-height: 100vw;
+          margin-left:0;
+          &.pants, &.w-jacket {
+            height:620px;
+          }
+        }
+      }
+     }
+    .main-content {
+      &.template-list-collections, &.template-index, &.template-collection   {
+        width: 100vw;
+         margin-left: 0!important;
+         margin-right: 0!important;
+         position: relative;
+         left: 0;
+         padding-left: 0;
+         padding-right: 0;
+         overflow-x: hidden;
+      }
+    }
     #main-header {
       width:0;
       position: fixed;
@@ -1305,6 +1339,14 @@ ul {
           right:0;
           z-index:9;
         }
+      }
+    }
+
+    .lookbook .lookbook-img-contain {
+      padding-left:0;
+      padding-right:0;
+      img {
+        max-width:100%;
       }
     }
 
