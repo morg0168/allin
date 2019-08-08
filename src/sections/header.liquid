@@ -118,17 +118,23 @@
             </li>
           {% else %}
             <li {% if link.active %}class="site-nav--active"{% endif %}>
+            {% if link.title == 'Cart' %}
+              <a href="{{ link.url }}" class="site-nav__link cart-count">{{ link.title }}
+            ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+            </a>
+            {% else %}
               <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            {% endif %}
             </li>
           {% endif %}
         {% endfor %}
         {% comment %}
         {% include 'currency-picker' %}
         {% endcomment %}
-        <a href="/cart" class="cart-count">
+        <!-- <a href="/cart" class="cart-count">
           {{ 'layout.cart.title' | t }}
           ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-        </a>
+        </a> -->
       </ul>
 
       {%- assign footer_linklist = section.settings.footer_linklist -%}
