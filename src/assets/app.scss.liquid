@@ -637,11 +637,11 @@ ul {
    .slick-slider {
      display: none;
      width:345px;
-     height:345px;
+     height:500px;
      margin:0 auto;
      .slick-slide {
        width:345px;
-       height:345px;
+       height:500px;
      }
      .product-image {
        background-size: cover!important;
@@ -650,17 +650,17 @@ ul {
        position: relative;
        background-position: center!important;
        width: 345px!important;
-       height: 345px!important;
+       height: 500px!important;
      }
    }
-   &.pants, &.w-jacket {
+   &.shoes {
      .slick-slider {
-       height:500px;
+       height:345px;
        .slick-slide {
-         height:500px;
+         height:345px;
        }
        .product-image {
-         height: 500px!important;
+         height: 345px!important;
        }
      }
    }
@@ -1040,32 +1040,32 @@ ul {
   @include media-query($large-up) {
     .template-product {
       .product-item-container {
-        .slick-slider {
-          width:414px;
-          height:414px;
-          .slick-slide {
-            width:414px;
-            height:414px;
-          }
-          .product-image {
-            width: 414px!important;
-            height: 414px!important;
-          }
-        }
-        &.pants, &.w-jacket {
           .slick-slider {
-            width:345px;
-            height:515px;
+            width:365px;
+            height:540px;
             .slick-slide {
-              width:345px;
-              height:515px;
+              width:365px;
+              height:540px;
             }
             .product-image {
-              width:345px!important;
-              height: 515px!important;
+              width:365px!important;
+              height: 540px!important;
             }
           }
-        }
+          &.shoes {
+            .slick-slider {
+              width:414px;
+              height:414px;
+              .slick-slide {
+                width:414px;
+                height:414px;
+              }
+              .product-image {
+                width: 414px!important;
+                height: 414px!important;
+              }
+            }
+          }
       }
       form {
         .rte {
@@ -1079,15 +1079,29 @@ ul {
     .template-product {
       .product-item-container {
         .slick-slider {
-          width:514px;
-          height:514px;
+          width:450px;
+          height:660px;
           .slick-slide {
-            width:514px;
-            height:514px;
+            width:450px;
+            height:660px;
           }
           .product-image {
-            width: 514px!important;
-            height: 514px!important;
+            width: 450px!important;
+            height: 660px!important;
+          }
+        }
+        &.shoes {
+          .slick-slider {
+            width:480px;
+            height:514px;
+            .slick-slide {
+              width:514px;
+              height:514px;
+            }
+            .product-image {
+              width: 514px!important;
+              height: 514px!important;
+            }
           }
         }
       }
