@@ -18,6 +18,6 @@
     "@shopify/slate": "^0.13.0"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "0.13.0"
+    "@shopify/slate-tools": "1.0.0-beta.19"
   }
 }
